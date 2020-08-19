@@ -9,6 +9,9 @@
     "doc": "doc",
     "test": "tests"
   },
+  "bin": {
+    "ember-cli-ui": "bin/cli.js"
+  },
   "scripts": {
     "build": "ember build --environment=production",
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
