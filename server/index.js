@@ -2,11 +2,12 @@ var express = require('express');
 var expressWs = require('express-ws');
 var os = require('os');
 var pty = require('node-pty');
+const path = require('path');
 
 // Whether to use binary transport.
 const USE_BINARY = os.platform() !== "win32";
 
-function startServer() {
+function startServer(projectPath) {
   var app = express();
   expressWs(app);
 
@@ -19,6 +20,11 @@ function startServer() {
     next();
   });
 
+   app.get('/', (req, res) => { // lgtm [js/missing-rate-limiting]
+     const indexFile = path.join(__dirname, '..',   'dist/index.html');
+    res.sendFile(indexFile);
+  });
+  app.use('/assets', express.static(path.join(__dirname, '..', 'dist/assets')));
   app.post('/terminals', (req, res) => {
     //console.log(process.env.EMBER_CLI_PROJECT_PATH);
     const env = Object.assign({}, process.env);
@@ -30,7 +36,8 @@ function startServer() {
         cols: cols || 80,
         rows: rows || 24,
         //cwd: env.PWD,
-        cwd: process.env.EMBER_CLI_PROJECT_PATH,
+        //cwd: process.env.EMBER_CLI_PROJECT_PATH,
+        cwd: projectPath,
         env: env,
         encoding: USE_BINARY ? null : 'utf8'
       });
