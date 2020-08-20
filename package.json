@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-ui",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Small description for ember-cli-ui goes here",
   "repository": "https://github.com/rajasegar/ember-cli-ui",
   "license": "MIT",
@@ -17,8 +17,8 @@
     "lint": "npm-run-all --aggregate-output --continue-on-error --parallel lint:*",
     "lint:hbs": "ember-template-lint .",
     "lint:js": "eslint .",
-     "start:cli" : "./bin/cli.js",
-     "build:watch": "ember build --watch",
+    "start:cli": "./bin/cli.js",
+    "build:watch": "ember build --watch",
     "start": "npm-run-all --aggregate-output --parallel start:cli build:watch",
     "test": "npm-run-all lint:* test:*",
     "test:ember": "ember test",
