@@ -1,29 +1,28 @@
-import Modifier from 'ember-modifier';
+import Component from '@glimmer/component';
+import { action } from '@ember/object';
+
 import { Terminal } from  'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
+import { WebLinksAddon } from 'xterm-addon-web-links';
 
-let  socket = null;
-let  term  = null;
-let  pid = null;
-
-
-function runRealTerminal() {
-  term.loadAddon(new AttachAddon(socket));
-  term._initialized = true;
-}
-
-function runFakeTerminal() {
-}
-
-export default class CreateXtermModifier extends Modifier {
+let socket = null;
+let term = null;
+let pid = null;
+export default class TestRunnerComponent extends Component {
 
 
-  didInstall() {
+  @action
+  runTests() {
+    socket.send('npm test\r\n');
+  }
+
+  initTerminal(element) {
 
     term = new Terminal();
-    term.open(this.element);
+    term.loadAddon(new WebLinksAddon(undefined, undefined, true));
+    term.open(element);
     term.focus();
-    window.term = this.term;
+    window.term = term;
     term.onResize((size) => {
       if (!pid) {
         return;
@@ -48,13 +47,15 @@ export default class CreateXtermModifier extends Modifier {
           pid = processId;
           socketURL += processId;
           socket = new WebSocket(socketURL);
-          socket.onopen = runRealTerminal;
-          socket.onclose = runFakeTerminal;
-          socket.onerror = runFakeTerminal;
+          socket.onopen = () => {
+            term.loadAddon(new AttachAddon(socket));
+            term._initialized = true;
+          };
+          socket.onclose = () => {};
+          socket.onerror = () => {};
         });
       });
     }, 0);
-
 
   }
 

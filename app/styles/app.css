@@ -1,0 +1,65 @@
+:root {
+  --ember: #E04E39;
+  --linen: #FDF7F6;
+  --white: #FDFDFD;
+  --black: #212121;
+  --burnt-ember: #9B2918;
+  --gray: #817F7F;
+  --blue: #1E719B;
+  --faint-gray: #EFEBEA;
+  --light-blue: #74B0CE;
+  --yellow: #FBC840;
+}
+body {
+  font-family: sans-serif;
+  background: var(--linen);
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+}
+
+nav {
+  background: var(--burnt-ember);
+}
+
+nav ul {
+  padding: 0;
+}
+nav ul li {
+  list-style: none;
+}
+
+nav ul li a {
+  color: var(--white);
+  text-decoration: none;
+  display: block;
+  width: 100%;
+  padding: 0.5em;
+}
+
+nav ul li a.active {
+  color: var(--ember);
+  background: var(--white);
+}
+h1,h2,h3,h4,h5,h6 {
+  color: var(--ember);
+}
+
+button {
+  margin: 1em;
+  padding: 1em;
+  background: var(--ember);
+  color: var(--white);
+  border:none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.right_col {
+  padding: 1em;
+}

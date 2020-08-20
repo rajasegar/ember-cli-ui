@@ -1,3 +1,15 @@
-<h1>Ember CLI UI</h1>
-<Terminal/>
+<h1>Ember CLI UI - Super name</h1>
+<div class="main">
+  <nav>
+<ul>
+  <li><LinkTo @route="index">Home</LinkTo></li>
+  <li><LinkTo @route="serve">Serve</LinkTo></li>
+  <li><LinkTo @route="test">Test</LinkTo></li>
+  <li><LinkTo @route="lint">Lint</LinkTo></li>
+  <li><LinkTo @route="generate">Generate</LinkTo></li>
+</ul>
+  </nav>
+  <div class="right_col">
 {{outlet}}
+  </div>
+</div>

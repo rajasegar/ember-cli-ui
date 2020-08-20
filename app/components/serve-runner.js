@@ -1,29 +1,39 @@
-import Modifier from 'ember-modifier';
+import Component from '@glimmer/component';
+import { tracked } from '@glimmer/tracking';
+import { action } from '@ember/object';
 import { Terminal } from  'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
+import { WebLinksAddon } from 'xterm-addon-web-links';
 
-let  socket = null;
-let  term  = null;
-let  pid = null;
+let socket = null;
+let term = null;
+let pid = null;
 
+export default class ServeRunnerComponent extends Component {
 
-function runRealTerminal() {
-  term.loadAddon(new AttachAddon(socket));
-  term._initialized = true;
-}
+  @tracked buttonLabel = "Start Server"
+  @tracked serverRunning = false;
 
-function runFakeTerminal() {
-}
+  @action
+  startServer() {
+    if(this.serverRunning) {
+      this.buttonLabel = "Start Server";
+      socket.send('\x03');
+    } else {
 
-export default class CreateXtermModifier extends Modifier {
+      this.buttonLabel = "Stop Server";
+      socket.send('npm start\r\n');
+    }
+    this.serverRunning = !this.serverRunning;
+  }
 
-
-  didInstall() {
+  initTerminal(element) {
 
     term = new Terminal();
-    term.open(this.element);
+    term.loadAddon(new WebLinksAddon(undefined, undefined, true));
+    term.open(element);
     term.focus();
-    window.term = this.term;
+    window.term = term;
     term.onResize((size) => {
       if (!pid) {
         return;
@@ -48,13 +58,15 @@ export default class CreateXtermModifier extends Modifier {
           pid = processId;
           socketURL += processId;
           socket = new WebSocket(socketURL);
-          socket.onopen = runRealTerminal;
-          socket.onclose = runFakeTerminal;
-          socket.onerror = runFakeTerminal;
+          socket.onopen = () => {
+            term.loadAddon(new AttachAddon(socket));
+            term._initialized = true;
+          };
+          socket.onclose = () => {};
+          socket.onerror = () => {};
         });
       });
     }, 0);
-
 
   }
 

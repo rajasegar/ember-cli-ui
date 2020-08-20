@@ -7,4 +7,8 @@ export default class Router extends EmberRouter {
 }
 
 Router.map(function() {
+  this.route('serve');
+  this.route('test');
+  this.route('lint');
+  this.route('generate');
 });
