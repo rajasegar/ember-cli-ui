@@ -1,15 +1,27 @@
-<h1>Ember CLI UI - Super name</h1>
 <div class="main">
   <nav>
-<ul>
-  <li><LinkTo @route="index">Home</LinkTo></li>
-  <li><LinkTo @route="serve">Serve</LinkTo></li>
-  <li><LinkTo @route="test">Test</LinkTo></li>
-  <li><LinkTo @route="lint">Lint</LinkTo></li>
-  <li><LinkTo @route="generate">Generate</LinkTo></li>
-</ul>
+    <p class="text-center"><img class="logo" alt="ember-cli-ui" src="/assets/images/logo.png"/>
+    </p>
+    <ul>
+      <li><LinkTo @route="index">Home</LinkTo></li>
+    </ul>
+    <h3 class="text-white">Tasks</h3>
+    <ul>
+      <li>
+        <LinkTo @route="serve">
+        Serve</LinkTo>
+      </li>
+      <li>
+        <LinkTo @route="test">
+        Test</LinkTo></li>
+      <li><LinkTo @route="lint">Lint</LinkTo></li>
+      <li><LinkTo @route="generate">Generate</LinkTo></li>
+      <li><LinkTo @route="destroy">Destroy</LinkTo></li>
+      <li><LinkTo @route="install">Install</LinkTo></li>
+      <li><LinkTo @route="build">Build</LinkTo></li>
+    </ul>
   </nav>
   <div class="right_col">
-{{outlet}}
+    {{outlet}}
   </div>
 </div>

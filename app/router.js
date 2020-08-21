@@ -11,4 +11,7 @@ Router.map(function() {
   this.route('test');
   this.route('lint');
   this.route('generate');
+  this.route('destroy');
+  this.route('install');
+  this.route('build');
 });

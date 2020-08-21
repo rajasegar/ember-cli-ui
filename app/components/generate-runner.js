@@ -21,7 +21,9 @@ export default class GenerateRunnerComponent extends Component {
 
   @action
   runGenerate() {
-    socket.send(`ember g ${this.blueprint} ${this.name}\r\n`);
+    if(this.name) {
+      socket.send(`ember g ${this.blueprint} ${this.name}\r\n`);
+    }
   }
 
   @action

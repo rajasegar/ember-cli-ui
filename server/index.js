@@ -8,6 +8,8 @@ const path = require('path');
 const USE_BINARY = os.platform() !== "win32";
 
 function startServer(projectPath) {
+  //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
+
   const app = express();
   expressWs(app);
 
@@ -25,6 +27,11 @@ function startServer(projectPath) {
     res.sendFile(indexFile);
   });
   app.use('/assets', express.static(path.join(__dirname, '..', 'dist/assets')));
+
+  app.get('/project', (req,res) => {
+    res.json(require(`${projectPath}/package.json`));
+  });
+
   app.post('/terminals', (req, res) => {
     const env = Object.assign({}, process.env);
     env['COLORTERM'] = 'truecolor';
@@ -35,7 +42,6 @@ function startServer(projectPath) {
         cols: cols || 80,
         rows: rows || 24,
         cwd: projectPath,
-        //cwd: '/Users/rajasegarchandran/www/super-rentals',
         env: env,
         encoding: USE_BINARY ? null : 'utf8'
       });

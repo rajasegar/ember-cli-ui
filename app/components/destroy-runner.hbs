@@ -1,0 +1,8 @@
+<select {{on "change" this.updateBlueprint}}>
+  {{#each this.blueprints as |b|}}
+  <option value={{b.value}}>{{b.title}}</option>
+{{/each}}
+</select>
+Name:<Input type="text" placeholder="hello-world" @value={{this.name}}/>
+<button type="button" {{on "click" this.runDestroy}}>Destroy</button>
+<div id="terminal" {{did-insert this.initTerminal }}></div>
