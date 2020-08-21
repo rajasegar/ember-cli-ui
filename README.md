@@ -12,7 +12,33 @@ ember-cli on the browser
 
 The CLI will be automatically open in a browser window 
 
+## Screenshots
+### Home page
+![home](screenshots/home.png)
 
+### Install page
+![install](screenshots/install.png)
+
+### Serve page
+![serve](screenshots/serve.png)
+
+### Lint page
+![lint](screenshots/lint.png)
+
+### Test page
+![test](screenshots/test.png)
+
+### Generate page
+![generate](screenshots/generate.png)
+
+### Destroy page
+![destroy](screenshots/destroy.png)
+
+### Build page
+![build](screenshots/build.png)
+
+### Project tasks page
+![project-tasks](screenshots/project-tasks.png)
 
 ## Prerequisites
 
