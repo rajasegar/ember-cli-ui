@@ -5,13 +5,17 @@ Ember projects using GUI
 
 ## Installation
 
-* `npm install -g ember-cli-ui`
+```
+npm install -g ember-cli-ui
+```
 
-## Running / Development
+## Usage
 
-* `ember-cli-ui`
+```
+ember-cli-ui
+```
 
-The CLI will be automatically open a new browser window and serve from an available port.
+The CLI will automatically open a new browser window and serve a pre-built Ember project from an available port.
 
 ## Screenshots
 ### Home page
