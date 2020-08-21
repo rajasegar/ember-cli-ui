@@ -21,4 +21,4 @@ Custom
 <label for="custom-filter">Filter: </label>
 <Input type="text" id="custom-filter" @value={{this.filter}}/>
 <button type="button" {{on "click" this.runTests}}>Run Tests</button>
-<Terminal @command={{this.command}}/>
+<Terminal @command={{this.command}} @task="test"/>

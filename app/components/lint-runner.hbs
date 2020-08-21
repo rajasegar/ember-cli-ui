@@ -11,4 +11,4 @@ JS
 HBS
 </label>
 <button type="button" {{on "click" this.runLint}}>Run Lint</button>
-<Terminal @command={{this.command}}/>
+<Terminal @command={{this.command}} @task="lint"/>

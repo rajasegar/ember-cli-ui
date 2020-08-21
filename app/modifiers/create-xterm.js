@@ -20,7 +20,7 @@ export default class CreateXtermModifier extends Modifier {
 
   didInstall() {
 
-
+    const task = this.args.named.task;
     this.term = new Terminal();
     this.term.loadAddon(new WebLinksAddon(undefined, undefined, true));
     this.term.open(this.element);
@@ -32,7 +32,7 @@ export default class CreateXtermModifier extends Modifier {
       }
       const cols = size.cols;
       const rows = size.rows;
-      const url = '/terminals/' + this.pid + '/size?cols=' + cols + '&rows=' + rows;
+      const url = '/terminals/' + task + '/size?cols=' + cols + '&rows=' + rows;
 
       fetch(url, {method: 'POST'});
     });
@@ -44,10 +44,18 @@ export default class CreateXtermModifier extends Modifier {
     setTimeout(() => {
 
 
-      fetch('/terminals?cols=' + this.term.cols + '&rows=' + this.term.rows, {method: 'POST'}).then((res) =>  {
+      const url = new URL(`${location.origin}/terminals`);
+      const params = { 
+        cols: this.term.cols,
+        rows: this.term.rows,
+        task: task
+      };
+      Object.keys(params).forEach(key => url.searchParams.append(key, params[key]));
+
+      fetch(url, {method: 'POST'}).then((res) =>  {
         res.text().then((processId) =>  {
           this.pid = processId;
-          socketURL += processId;
+          socketURL += task;
           this.socket = new WebSocket(socketURL);
           this.socket.onopen = () =>  {
             this.term.loadAddon(new AttachAddon(this.socket));

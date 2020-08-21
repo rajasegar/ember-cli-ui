@@ -1,2 +1,3 @@
-<button type="button" {{on "click" this.startServer}}>{{this.buttonLabel}}</button>
-<Terminal @command={{this.command}}/>
+<button type="button" {{on "click" this.startServer}}>Start</button>
+<button type="button" {{on "click" this.stopServer}}>Stop</button>
+<Terminal @command={{this.command}} @task="serve"/>

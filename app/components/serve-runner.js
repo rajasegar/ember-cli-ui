@@ -4,20 +4,16 @@ import { action } from '@ember/object';
 
 export default class ServeRunnerComponent extends Component {
 
-  @tracked buttonLabel = "Start Server"
-  @tracked serverRunning = false;
   @tracked command;
 
   @action
   startServer() {
-    if(this.serverRunning) {
-      this.buttonLabel = "Start Server";
-      this.command = '\x03';
-    } else {
-      this.buttonLabel = "Stop Server";
-      this.command = 'npm start\r\n';
-    }
-    this.serverRunning = !this.serverRunning;
+    this.command = 'npm start\r\n';
+  }
+
+  @action
+  stopServer() {
+    this.command = '\x03';
   }
 
 

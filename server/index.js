@@ -18,8 +18,8 @@ function startServer(projectPath) {
   const terminals = {},
     logs = {};
 
-   app.get('/', (req, res) => { 
-     const indexFile = path.join(__dirname, '..',   'dist/index.html');
+  app.get('/', (req, res) => { 
+    const indexFile = path.join(__dirname, '..',   'dist/index.html');
     res.sendFile(indexFile);
   });
 
@@ -32,8 +32,16 @@ function startServer(projectPath) {
   app.post('/terminals', (req, res) => {
     const env = Object.assign({}, process.env);
     env['COLORTERM'] = 'truecolor';
-    const cols = parseInt(req.query.cols),
-      rows = parseInt(req.query.rows),
+    const cols = parseInt(req.query.cols);
+    const rows = parseInt(req.query.rows);
+    const task = req.query.task;
+    let term;
+
+    // Connect if term is already there
+    // instead of creating a new one
+    if(terminals[task]) {
+      term = terminals[task];
+    } else {
       term = pty.spawn(process.platform === 'win32' ? 'cmd.exe' : 'bash', [], {
         name: 'xterm-256color',
         cols: cols || 80,
@@ -43,9 +51,15 @@ function startServer(projectPath) {
         encoding: USE_BINARY ? null : 'utf8'
       });
 
-    console.log('Created terminal with PID: ' + term.pid);
-    terminals[term.pid] = term;
-    logs[term.pid] = '';
+      console.log('Created terminal with PID: ' + term.pid);
+
+      // terminals use task name as the key eg. build, serve
+      terminals[task] = term;
+
+      // logs still use pid as the key
+      logs[term.pid] = '';
+    }
+
     term.on('data', function(data) {
       logs[term.pid] += data;
     });
@@ -53,6 +67,7 @@ function startServer(projectPath) {
     res.end();
   });
 
+  // TODO: Change pid reference to task
   app.post('/terminals/:pid/size', (req, res) => {
     const pid = parseInt(req.params.pid),
       cols = parseInt(req.query.cols),
@@ -64,8 +79,9 @@ function startServer(projectPath) {
     res.end();
   });
 
+  // TODO: Change pid reference to task
   app.ws('/terminals/:pid', function (ws, req) {
-    const term = terminals[parseInt(req.params.pid)];
+    const term = terminals[req.params.pid];
     console.log('Connected to terminal ' + term.pid);
     ws.send(logs[term.pid]);
 

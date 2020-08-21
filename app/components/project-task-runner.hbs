@@ -6,4 +6,4 @@
 </select>
 <button type="button" {{on "click" this.runTask}}>Run Task</button>
 <p><code>{{this.taskCommand}}</code></p>
-<Terminal @command={{this.command}}/>
+<Terminal @command={{this.command}} @task="project"/>
