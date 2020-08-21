@@ -22,9 +22,7 @@
     "start": "npm-run-all --aggregate-output --parallel start:cli build:watch",
     "test": "npm-run-all lint:* test:*",
     "test:ember": "ember test",
-    "pre:deploy": "npm run build",
-    "deploy": "npm version patch && git push && git push --tags && npm publish",
-    "deploy:feat": "npm version minor && git push && git push --tags && npm publish"
+    "deploy": " git push && git push --tags && npm publish",
   },
   "devDependencies": {
     "@ember/optional-features": "^1.3.0",
