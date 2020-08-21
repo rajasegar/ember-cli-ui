@@ -1,6 +1,7 @@
 # ember-cli-ui
 
-ember-cli on the browser 
+[ember-cli](https://cli.emberjs.com/release/) in the browser to create and manage your
+Ember projects using GUI
 
 ## Installation
 
@@ -10,7 +11,7 @@ ember-cli on the browser
 
 * `ember-cli-ui`
 
-The CLI will be automatically open in a browser window 
+The CLI will be automatically open a new browser window and serve from an available port.
 
 ## Screenshots
 ### Home page
