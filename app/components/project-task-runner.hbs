@@ -4,6 +4,6 @@
     <option value={{t.name}}>{{t.name}}</option>
   {{/each}}
 </select>
-<button type="button" {{on "click" this.runTask}}>Run Task</button>
+<button type="button" {{on "click" this.runTask}}><i class="fas fa-play"></i>Run Task</button>
 <p><code>{{this.taskCommand}}</code></p>
 <Terminal @command={{this.command}} @task="project"/>

@@ -3,32 +3,37 @@
     <p class="text-center"><img class="logo" alt="ember-cli-ui" src="/assets/images/logo.png"/>
     </p>
     <ul>
-      <li><LinkTo @route="index">Home</LinkTo></li>
+      <li><LinkTo @route="index"><i class="fas fa-home"></i> Home</LinkTo></li>
     </ul>
     <hr/>
     <h3 class="text-white">Tasks</h3>
     <ul>
       <li>
         <LinkTo @route="serve">
-        Serve</LinkTo>
+        <i class="fas fa-server"></i> Serve</LinkTo>
       </li>
       <li>
         <LinkTo @route="test">
-        Test</LinkTo></li>
-      <li><LinkTo @route="lint">Lint</LinkTo></li>
-      <li><LinkTo @route="generate">Generate</LinkTo></li>
-      <li><LinkTo @route="destroy">Destroy</LinkTo></li>
-      <li><LinkTo @route="install">Install</LinkTo></li>
-      <li><LinkTo @route="build">Build</LinkTo></li>
+        <i class="fas fa-vial"></i> Test</LinkTo></li>
+      <li><LinkTo @route="lint"><i class="fas fa-broom"></i> Lint</LinkTo></li>
+      <li><LinkTo @route="generate"><i class="fas fa-plus-square"></i> Generate</LinkTo></li>
+      <li><LinkTo @route="destroy"><i class="fas fa-trash-alt"></i> Destroy</LinkTo></li>
+      <li><LinkTo @route="install"><i class="fas fa-download"></i> Install</LinkTo></li>
+      <li><LinkTo @route="build"><i class="fas fa-file-archive"></i> Build</LinkTo></li>
     </ul>
     <hr/>
     <ul>
       <li>
-        <LinkTo @route="project-tasks">Project Tasks</LinkTo>
+        <LinkTo @route="project-tasks"><i class="fas fa-tasks"></i> Project Tasks</LinkTo>
       </li>
     </ul>
   </nav>
   <div class="right_col">
     {{outlet}}
+    <footer>
+      <p class="text-center">
+      Made with <span class="text-ember">&hearts;</span> for the <a href="https://emberjs.com">Ember.js</a> community. <a href="https://github.com/rajasegar/ember-cli-ui">Source Code</a> &copy; 2020
+       </p>
+    </footer>
   </div>
 </div>
