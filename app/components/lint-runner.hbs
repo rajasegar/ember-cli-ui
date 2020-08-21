@@ -1,2 +1,14 @@
+<label>
+  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="all" checked/>
+ALL
+</label>
+<label>
+  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="js"/>
+JS
+</label>
+<label>
+  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="hbs"/>
+HBS
+</label>
 <button type="button" {{on "click" this.runLint}}>Run Lint</button>
-<div id="terminal" {{did-insert this.initTerminal }}></div>
+<Terminal @command={{this.command}}/>

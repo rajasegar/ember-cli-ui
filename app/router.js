@@ -14,4 +14,5 @@ Router.map(function() {
   this.route('destroy');
   this.route('install');
   this.route('build');
+  this.route('project-tasks');
 });

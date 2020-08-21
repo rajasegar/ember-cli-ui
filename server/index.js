@@ -3,6 +3,8 @@ const expressWs = require('express-ws');
 const os = require('os');
 const pty = require('node-pty');
 const path = require('path');
+const getPort = require('get-port');
+const { exec } = require('child_process');
 
 // Whether to use binary transport.
 const USE_BINARY = os.platform() !== "win32";
@@ -16,16 +18,11 @@ function startServer(projectPath) {
   const terminals = {},
     logs = {};
 
-  app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "http://localhost:3000"); // update to match the domain you will make the request from
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-  });
-
-   app.get('/', (req, res) => { // lgtm [js/missing-rate-limiting]
+   app.get('/', (req, res) => { 
      const indexFile = path.join(__dirname, '..',   'dist/index.html');
     res.sendFile(indexFile);
   });
+
   app.use('/assets', express.static(path.join(__dirname, '..', 'dist/assets')));
 
   app.get('/project', (req,res) => {
@@ -126,11 +123,22 @@ function startServer(projectPath) {
     });
   });
 
-  const port = process.env.PORT || 3000,
-    host = os.platform() === 'win32' ? '127.0.0.1' : '0.0.0.0';
+  (async () => {
+    const port = await getPort();
 
-  console.log('Xterm listening to http://127.0.0.1:' + port);
-  app.listen(port, host);
+    const host = os.platform() === 'win32' ? '127.0.0.1' : '0.0.0.0';
+
+    console.log('Xterm listening to http://localhost:' + port);
+
+    let openCommand = 'open';
+    if (os.platform() === 'win32') openCommand = 'start';
+    if (os.platform() === 'linux') openCommand = 'xdg-open';
+
+    exec(`${openCommand} http://localhost:${port}`, () => {});
+
+    app.listen(port, host);
+  })();
+
 }
 
 module.exports = startServer;

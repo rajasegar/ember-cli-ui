@@ -1,56 +1,60 @@
 import Modifier from 'ember-modifier';
 import { Terminal } from  'xterm';
 import { AttachAddon } from 'xterm-addon-attach';
-
-let  socket = null;
-let  term  = null;
-let  pid = null;
-
-
-function runRealTerminal() {
-  term.loadAddon(new AttachAddon(socket));
-  term._initialized = true;
-}
-
-function runFakeTerminal() {
-}
+import { WebLinksAddon } from 'xterm-addon-web-links';
 
 export default class CreateXtermModifier extends Modifier {
 
+  socket = null;
+  term = null;
+  pid = null;
+
+  didUpdateArguments() {
+    const command = this.command;
+    this.socket.send(command);
+  }
+
+  get command() {
+    return this.args.named.command;
+  }
 
   didInstall() {
 
-    term = new Terminal();
-    term.open(this.element);
-    term.focus();
+
+    this.term = new Terminal();
+    this.term.loadAddon(new WebLinksAddon(undefined, undefined, true));
+    this.term.open(this.element);
+    this.term.focus();
     window.term = this.term;
-    term.onResize((size) => {
-      if (!pid) {
+    this.term.onResize((size) => {
+      if (!this.pid) {
         return;
       }
       const cols = size.cols;
       const rows = size.rows;
-      const url = 'http://localhost:3000/terminals/' + pid + '/size?cols=' + cols + '&rows=' + rows;
+      const url = '/terminals/' + this.pid + '/size?cols=' + cols + '&rows=' + rows;
 
       fetch(url, {method: 'POST'});
     });
 
     const protocol = (location.protocol === 'https:') ? 'wss://' : 'ws://';
-    const port = 3000;
-    let socketURL = protocol + location.hostname + ((port) ? (':' + port) : '') + '/terminals/';
+    let socketURL = protocol + location.hostname + ((location.port) ? (':' + location.port) : '') + '/terminals/';
 
     // fit is called within a setTimeout, cols and rows need this.
-    setTimeout(function() {
+    setTimeout(() => {
 
 
-      fetch('http://localhost:3000/terminals?cols=' + term.cols + '&rows=' + term.rows, {method: 'POST'}).then(function(res)  {
-        res.text().then(function(processId)  {
-          pid = processId;
+      fetch('/terminals?cols=' + this.term.cols + '&rows=' + this.term.rows, {method: 'POST'}).then((res) =>  {
+        res.text().then((processId) =>  {
+          this.pid = processId;
           socketURL += processId;
-          socket = new WebSocket(socketURL);
-          socket.onopen = runRealTerminal;
-          socket.onclose = runFakeTerminal;
-          socket.onerror = runFakeTerminal;
+          this.socket = new WebSocket(socketURL);
+          this.socket.onopen = () =>  {
+            this.term.loadAddon(new AttachAddon(this.socket));
+            this.term._initialized = true;
+          };
+          this.socket.onclose = () => {};
+          this.socket.onerror = () => {};
         });
       });
     }, 0);

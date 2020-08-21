@@ -1,2 +1,24 @@
+<label>
+  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="ALL" checked/>
+ALL
+</label>
+<label>
+  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Unit"/>
+Unit
+</label>
+<label>
+  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Integration"/>
+Integration
+</label>
+<label>
+  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Acceptance"/>
+Acceptance
+</label>
+<label>
+  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Custom"/>
+Custom 
+</label>
+<label for="custom-filter">Filter: </label>
+<Input type="text" id="custom-filter" @value={{this.filter}}/>
 <button type="button" {{on "click" this.runTests}}>Run Tests</button>
-<div id="terminal" {{did-insert this.initTerminal }}></div>
+<Terminal @command={{this.command}}/>
