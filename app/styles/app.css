@@ -144,4 +144,7 @@ footer {
   margin: 0 auto;
 }
 
-
+.new-project-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+}

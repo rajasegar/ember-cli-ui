@@ -5,6 +5,7 @@ const pty = require('node-pty');
 const path = require('path');
 const getPort = require('get-port');
 const { exec } = require('child_process');
+const fs = require('fs');
 
 // Whether to use binary transport.
 const USE_BINARY = os.platform() !== "win32";
@@ -26,7 +27,12 @@ function startServer(projectPath) {
   app.use('/assets', express.static(path.join(__dirname, '..', 'dist/assets')));
 
   app.get('/project', (req,res) => {
-    res.json(require(`${projectPath}/package.json`));
+    const manifestPath =`${projectPath}/package.json`; 
+    if(fs.existsSync(manifestPath)) {
+    res.json(require(manifestPath));
+    } else {
+      res.json({});
+    }
   });
 
   app.post('/terminals', (req, res) => {
@@ -50,6 +56,9 @@ function startServer(projectPath) {
         env: env,
         encoding: USE_BINARY ? null : 'utf8'
       });
+
+      term.write('clear\r');
+      term.write('pwd\r');
 
       console.log('Created terminal with PID: ' + term.pid);
 
@@ -129,6 +138,11 @@ function startServer(projectPath) {
     });
     ws.on('message', function(msg) {
       term.write(msg);
+      // Change the project to new path
+      if(msg.includes('ember new')) {
+        const [,,newPath] = msg.split(' ');
+        projectPath += "/" + newPath;
+      }
     });
     ws.on('close', function () {
       term.kill();

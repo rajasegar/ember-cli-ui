@@ -15,4 +15,5 @@ Router.map(function() {
   this.route('install');
   this.route('build');
   this.route('project-tasks');
+  this.route('new-project');
 });

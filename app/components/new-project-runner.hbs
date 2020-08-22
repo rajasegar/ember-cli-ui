@@ -1,0 +1,57 @@
+<div class="new-project-wrapper">
+  <div class="project-options">
+    <label for="name">Project Name: </label>
+    <Input type="text" id="name" @value={{this.name}}/>
+
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleDryRun}}/>
+      --dry-run (-d)</label>
+    </p>
+
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleVerbose}}/>
+      --verbose (-v)</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleSkipNpm}}/>
+      --skip-npm (-sn)</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleSkipGit}}/>
+      --skip-git (-sg)</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleSkipBower}}/>
+      --skip-bower (-sb)</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleYarn}}/>
+      --yarn</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleWelcome}}/>
+      --no-welcome</label>
+    </p>
+    <p>
+    <label>Blueprint:</label>
+    <Input @type="text" {{on 'input' this.updateBlueprint }}/>
+    </p>
+    <p>
+    <label>Directory:</label>
+    <Input @type="text" {{on 'input' this.updateDirectory }}/>
+    </p>
+
+    <button type="button" {{on "click" this.createNewProject}}><i class="fas fa-play"></i>Create</button>
+  </div>
+  <div class="terminal">
+    <Terminal @command={{this.command}} @task="new"/>
+  </div>
+</div>
+
