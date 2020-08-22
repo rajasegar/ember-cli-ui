@@ -1,0 +1,46 @@
+<div class="new-project-wrapper">
+  <div class="update-options">
+    <p>
+    <label for="toversion">To Version: </label>
+    <Input type="text" id="toversion" @value={{this.toVersion}}/>
+    </p>
+
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleResolveConflicts}}/>
+      --resolve-conflicts</label>
+    </p>
+
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleRunCodemods}}/>
+      --run-codemods</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleReset}}/>
+      --reset</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleCompare}}/>
+      --compare-only</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleStats}}/>
+      --stats-only</label>
+    </p>
+    <p>
+    <label>
+      <Input @type="checkbox" {{on 'click' this.toggleListCodemods}}/>
+      --list-codemods</label>
+    </p>
+  </div>
+  <div class="terminal">
+    <button type="button" {{on 'click' this.installEcu }}><i class="fas fa-download"></i> Install ember-cli-update</button>
+    <button type="button" {{on 'click' this.runUpdate }}><i class="fas fa-play"></i> Run Update</button>
+    <button type="button" {{on 'click' this.resetProject }}><i class="fas fa-undo"></i> Reset Project</button>
+    <Terminal @command={{this.command}} @task="update"/>
+  </div>
+</div>
