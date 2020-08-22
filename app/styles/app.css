@@ -1,20 +1,11 @@
+@import "_variables.css";
+@import "_typography.css";
+
 @font-face {
   font-family: 'Roboto';
   src: url('/assets/fonts/Roboto/Roboto-Regular.ttf');
 }
 
-:root {
-  --ember: #E04E39;
-  --linen: #FDF7F6;
-  --white: #FDFDFD;
-  --black: #212121;
-  --burnt-ember: #9B2918;
-  --gray: #817F7F;
-  --blue: #1E719B;
-  --faint-gray: #EFEBEA;
-  --light-blue: #74B0CE;
-  --yellow: #FBC840;
-}
 body {
   font-family: 'Roboto', sans-serif;
   background: var(--linen);
@@ -94,21 +85,6 @@ button:hover {
   padding: 1em;
 }
 
-.text-white {
-  color: var(--white);
-}
-
-.text-right {
-  text-align:right;
-}
-
-.text-center {
-  text-align: center;
-}
-
-.text-ember {
-  color: var(--ember);
-}
 
 .terminal {
   padding: 1em;
@@ -147,4 +123,13 @@ footer {
 .new-project-wrapper {
   display: grid;
   grid-template-columns: 1fr 3fr;
+}
+
+table, td {
+  border: 1px solid var(--black);
+  border-collapse: collapse;
+}
+
+table td, table th {
+  padding: .5em;
 }

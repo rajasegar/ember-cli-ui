@@ -1,0 +1,10 @@
+<h1>{{@project.name}}</h1>
+<p>{{@project.description}}</p>
+<p>Version: {{@project.version}}</p>
+<p>ember-cli: <a href="https://github.com/ember-cli/ember-cli/tree/v{{this.cliVersion}}">{{get @project.devDependencies 'ember-cli'}}</a></p>
+<p>Dependencies: {{this.depsLength}}</p>
+<p>Dev Dependencies: {{this.devDepsLength}}</p>
+<p>private: {{@project.private}}</p>
+<p>LICENSE: {{@project.license}}</p>
+<p>Ember edition: {{@project.ember.edition}}</p>
+<p>Node version: {{@project.engines.node}}</p>

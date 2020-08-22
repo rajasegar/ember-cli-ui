@@ -6,6 +6,8 @@ const path = require('path');
 const getPort = require('get-port');
 const { exec } = require('child_process');
 const fs = require('fs');
+const buffer = require('./buffer');
+const bufferUtf8 = require('./bufferUtf8');
 
 // Whether to use binary transport.
 const USE_BINARY = os.platform() !== "win32";
@@ -16,8 +18,8 @@ function startServer(projectPath) {
   const app = express();
   expressWs(app);
 
-  const terminals = {},
-    logs = {};
+  const terminals = {};
+  const logs = {};
 
   app.get('/', (req, res) => { 
     const indexFile = path.join(__dirname, '..',   'dist/index.html');
@@ -94,39 +96,6 @@ function startServer(projectPath) {
     console.log('Connected to terminal ' + term.pid);
     ws.send(logs[term.pid]);
 
-    // string message buffering
-    function buffer(socket, timeout) {
-      let s = '';
-      let sender = null;
-      return (data) => {
-        s += data;
-        if (!sender) {
-          sender = setTimeout(() => {
-            socket.send(s);
-            s = '';
-            sender = null;
-          }, timeout);
-        }
-      };
-    }
-    // binary message buffering
-    function bufferUtf8(socket, timeout) {
-      let buffer = [];
-      let sender = null;
-      let length = 0;
-      return (data) => {
-        buffer.push(data);
-        length += data.length;
-        if (!sender) {
-          sender = setTimeout(() => {
-            socket.send(Buffer.concat(buffer, length));
-            buffer = [];
-            sender = null;
-            length = 0;
-          }, timeout);
-        }
-      };
-    }
     const send = USE_BINARY ? bufferUtf8(ws, 5) : buffer(ws, 5);
 
     term.on('data', function(data) {

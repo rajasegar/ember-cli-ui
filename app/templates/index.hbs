@@ -1,10 +1,1 @@
-<h1>{{@model.project.name}}</h1>
-<p>{{@model.project.description}}</p>
-<p>Version: {{@model.project.version}}</p>
-<p>ember-cli: {{get @model.project.devDependencies 'ember-cli'}}</p>
-<p>Dependencies: {{get @model.project.dependencies 'length'}}</p>
-<p>Dev Dependencies: {{@model.project.devDependencies.length}}</p>
-<p>private: {{@model.project.private}}</p>
-<p>LICENSE: {{@model.project.license}}</p>
-<p>Ember edition: {{@model.project.ember.edition}}</p>
-<p>Node version: {{@model.project.engines.node}}</p>
+<ProjectInfo @project={{@model.project}}/>

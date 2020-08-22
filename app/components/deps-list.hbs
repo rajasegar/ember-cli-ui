@@ -1,0 +1,14 @@
+<table>
+  <thead>
+    <th>Package Name</th>
+    <th>Version</th>
+  </thead>
+  <tbody>
+      {{#each this.dependencies as |d|}}
+        <tr>
+          <td>{{d.name}}</td>
+          <td>{{d.version}}</td>
+        </tr>
+      {{/each}}
+  </tbody>
+</table>
