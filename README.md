@@ -1,7 +1,11 @@
 # ember-cli-ui
 
+![logo](public/assets/images/logo.png)
+
 [ember-cli](https://cli.emberjs.com/release/) in the browser to create and manage your
 Ember projects using GUI
+
+See the [demo](https://www.youtube.com/watch?v=AH2S1DVb4tg) video.
 
 ## Installation
 
