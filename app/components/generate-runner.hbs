@@ -6,5 +6,5 @@
 </select>
 <label for="name">Name: </label>
 <Input id="name" type="text" placeholder="hello-world" @value={{this.name}}/>
-<button type="button" {{on "click" this.runGenerate}}><i class="fas fa-plus-square"></i>Generate</button>
+<button type="button" {{on "click" this.runGenerate}}><FaIcon @icon="plus-square"/> Generate</button>
 <Terminal @command={{this.command}} @task="generate"/>

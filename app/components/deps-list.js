@@ -7,7 +7,6 @@ export default class DepsListComponent extends Component {
     return fetch(url)
       .then(res => res.json())
       .then(deps => {
-        debugger
         const { dependencies } = deps;
         return dependencies.map(d => {
           d.diff = '-';

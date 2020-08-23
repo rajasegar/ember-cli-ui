@@ -1,4 +1,4 @@
 <label for="name">Addon Name: </label>
-<Input id="name" type="text" placeholder="hello-world" @value={{this.name}}/>
-<button type="button" class="text-right" {{on "click" this.runInstall}}><i class="fas fa-download"></i>Install</button>
+<Input id="name" type="text" class="input--big" placeholder="hello-world" @value={{this.name}}/>
+<button type="button" class="text-right" {{on "click" this.runInstall}}><FaIcon @icon="download"/> Install</button>
 <Terminal @command={{this.command}} @task="install"/>

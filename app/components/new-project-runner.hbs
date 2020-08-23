@@ -50,7 +50,7 @@
 
   </div>
   <div class="terminal">
-    <button type="button" {{on "click" this.createNewProject}}><i class="fas fa-play"></i>Create</button>
+    <button type="button" {{on "click" this.createNewProject}}><FaIcon @icon="folder-plus"/> Create New Project</button>
     <Terminal @command={{this.command}} @task="new"/>
   </div>
 </div>

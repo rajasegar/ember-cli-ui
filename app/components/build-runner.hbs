@@ -1,2 +1,2 @@
-<button type="button" {{on "click" this.runBuild}}><i class="fas fa-file-archive"></i>Build</button>
+<button type="button" {{on "click" this.runBuild}}><FaIcon @icon="file-archive"/> Build</button>
 <Terminal @command={{this.command}} @task="build"/>

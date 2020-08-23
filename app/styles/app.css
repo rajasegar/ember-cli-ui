@@ -33,13 +33,6 @@ nav h1, h2, h3 {
   padding-left: 0.5em;
 }
 
-svg {
-  color: white;
-}
-
-svg:hover {
-  color: var(--ember);
-}
 
 nav ul {
   padding: 0;
@@ -61,6 +54,8 @@ nav ul li a.active {
   color: var(--ember);
   background: var(--linen);
 }
+
+
 h1,h2,h3,h4,h5,h6 {
   color: var(--ember);
 }
@@ -83,7 +78,7 @@ button:hover {
 
 .right_col {
   padding: 1em;
-  padding-bottom: 2em;
+  margin-bottom: 3em;
   max-height: 100vh;
   overflow: auto;
 }
@@ -100,14 +95,23 @@ input[type="text"], select {
   height: 40px;
   color: var(--ember);
   border-radius: 4px;
+  font-size: 1em;
+}
+
+.input--big {
+  width: 400px;
 }
 
 code {
-  background: var(--white);
-  color: var(--burnt-ember);
+  background: var(--faint-gray);
+  color: var(--blue);
   border-radius: 4px;
   font-weight: bold;
   padding: 1em;
+  font-size: 1.25em;
+  margin: 1em 0;
+  display: block;
+
 }
 
 a {
@@ -119,11 +123,15 @@ a {
 footer {
   position:fixed;
   bottom: 0;
-  left: 0;
+  left: 200px;
   width: 100%;
   margin: 0 auto;
   text-align:center;
   background: var(--white);
+}
+
+footer p {
+  margin: .5em 0;
 }
 
 .new-project-wrapper {

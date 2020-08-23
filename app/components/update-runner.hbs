@@ -38,9 +38,9 @@
     </p>
   </div>
   <div class="terminal">
-    <button type="button" {{on 'click' this.installEcu }}><i class="fas fa-download"></i> Install ember-cli-update</button>
-    <button type="button" {{on 'click' this.runUpdate }}><i class="fas fa-play"></i> Run Update</button>
-    <button type="button" {{on 'click' this.resetProject }}><i class="fas fa-undo"></i> Reset Project</button>
+    <button type="button" {{on 'click' this.installEcu }}><FaIcon @icon="download"/> Install ember-cli-update</button>
+    <button type="button" {{on 'click' this.runUpdate }}><FaIcon @icon="play"/> Run Update</button>
+    <button type="button" {{on 'click' this.resetProject }}><FaIcon @icon="undo"/> Reset Project</button>
     <Terminal @command={{this.command}} @task="update"/>
   </div>
 </div>

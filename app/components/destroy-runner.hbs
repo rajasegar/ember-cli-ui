@@ -6,5 +6,5 @@
 </select>
 <label for="name">Name: </label>
 <Input id="name" type="text" placeholder="hello-world" @value={{this.name}}/>
-<button type="button" {{on "click" this.runDestroy}}><i class="fas fa-trash-alt"></i>Destroy</button>
+<button type="button" {{on "click" this.runDestroy}}><FaIcon @icon="trash-alt"/> Destroy</button>
 <Terminal @command={{this.command}} @task="destroy"/>

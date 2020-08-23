@@ -3,38 +3,38 @@
     <p class="text-center"><img class="logo" alt="ember-cli-ui" src="/assets/images/logo.png"/>
     </p>
     <ul>
-      <li><LinkTo @route="index"><i class="fas fa-home"></i> Home</LinkTo></li>
+      <li><LinkTo @route="index"><FaIcon @icon="home"/> Home</LinkTo></li>
     </ul>
     <hr/>
     <h3 class="text-white">Tasks</h3>
     <ul>
       <li>
         <LinkTo @route="serve">
-        <i class="fas fa-server"></i> Serve</LinkTo>
+        <FaIcon @icon="server"/> Serve</LinkTo>
       </li>
       <li>
         <LinkTo @route="test">
-        <i class="fas fa-vial"></i> Test</LinkTo></li>
-      <li><LinkTo @route="lint"><i class="fas fa-broom"></i> Lint</LinkTo></li>
-      <li><LinkTo @route="generate"><i class="fas fa-plus-square"></i> Generate</LinkTo></li>
-      <li><LinkTo @route="destroy"><i class="fas fa-trash-alt"></i> Destroy</LinkTo></li>
-      <li><LinkTo @route="install"><i class="fas fa-download"></i> Install</LinkTo></li>
-      <li><LinkTo @route="build"><i class="fas fa-file-archive"></i> Build</LinkTo></li>
+        <FaIcon @icon="vial"/> Test</LinkTo></li>
+      <li><LinkTo @route="lint"><FaIcon @icon="broom"/> Lint</LinkTo></li>
+      <li><LinkTo @route="generate"><FaIcon @icon="plus-square"/> Generate</LinkTo></li>
+      <li><LinkTo @route="destroy"><FaIcon @icon="trash-alt"/> Destroy</LinkTo></li>
+      <li><LinkTo @route="install"><FaIcon @icon="download"/> Install</LinkTo></li>
+      <li><LinkTo @route="build"><FaIcon @icon="file-archive"/> Build</LinkTo></li>
     </ul>
     <hr/>
     <h3 class="text-white">Project</h3>
     <ul>
       <li>
-        <LinkTo @route="project-tasks"><i class="fas fa-tasks"></i>Tasks</LinkTo>
+        <LinkTo @route="project-tasks"><FaIcon @icon="tasks"/> Tasks</LinkTo>
       </li>
       <li>
-        <LinkTo @route="new-project"><i class="fas fa-folder-plus"></i> New Project</LinkTo>
+        <LinkTo @route="new-project"><FaIcon @icon="folder-plus"/> New Project</LinkTo>
       </li>
       <li>
-        <LinkTo @route="dependencies"><i class="fas fa-cubes"></i> Dependencies</LinkTo>
+        <LinkTo @route="dependencies"><FaIcon @icon="cubes"/> Dependencies</LinkTo>
       </li>
       <li>
-        <LinkTo @route="project-update"><i class="fas fa-wrench"></i> Update</LinkTo>
+        <LinkTo @route="project-update"><FaIcon @icon="wrench"/> Update</LinkTo>
       </li>
     </ul>
   </nav>
