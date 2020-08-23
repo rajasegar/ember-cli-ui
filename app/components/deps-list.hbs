@@ -1,14 +1,23 @@
-<table>
-  <thead>
-    <th>Package Name</th>
-    <th>Version</th>
-  </thead>
-  <tbody>
-      {{#each this.dependencies as |d|}}
+{{#async-await this.items as |items|}}
+  <table>
+    <thead>
+      <th>Package Name</th>
+      <th>Installed Version</th>
+      <th>Latest Version</th>
+      <th>Upgrade?</th>
+    </thead>
+    <tbody>
+      {{#each items as |d|}}
         <tr>
           <td>{{d.name}}</td>
           <td>{{d.version}}</td>
+          <td>{{d.latest}}</td>
+          <td><SemverBadge @type={{d.diff}}/></td>
         </tr>
       {{/each}}
-  </tbody>
-</table>
+
+    </tbody>
+  </table>
+{{else}}
+  <LoadingSpinner />
+{{/async-await}}

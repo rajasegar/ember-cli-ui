@@ -48,9 +48,9 @@
     <Input @type="text" {{on 'input' this.updateDirectory }}/>
     </p>
 
-    <button type="button" {{on "click" this.createNewProject}}><i class="fas fa-play"></i>Create</button>
   </div>
   <div class="terminal">
+    <button type="button" {{on "click" this.createNewProject}}><i class="fas fa-play"></i>Create</button>
     <Terminal @command={{this.command}} @task="new"/>
   </div>
 </div>

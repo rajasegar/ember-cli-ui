@@ -1,0 +1,10 @@
+{{log @type}}
+{{#if (eq @type "patch")}}
+  <span class="semver-badge patch">PATCH</span>
+  {{else if (eq @type "minor")}}
+  <span class="semver-badge minor">MINOR</span>
+  {{else if (eq @type "major")}}
+  <span class="semver-badge breaking">BREAKING</span>
+{{else}}
+  <span>-</span>
+{{/if}}

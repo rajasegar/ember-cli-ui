@@ -6,6 +6,7 @@ const path = require('path');
 const getPort = require('get-port');
 const { exec } = require('child_process');
 const fs = require('fs');
+const ncu = require('npm-check-updates');
 const buffer = require('./buffer');
 const bufferUtf8 = require('./bufferUtf8');
 
@@ -35,6 +36,33 @@ function startServer(projectPath) {
     } else {
       res.json({});
     }
+  });
+
+  app.get('/dependencies', async (req, res) => {
+    const upgraded = await ncu.run();
+    const manifestPath =`${projectPath}/package.json`; 
+    const manifest = require(manifestPath);
+    const { devDependencies, dependencies } = manifest;
+    let deps;
+    if(req.query.type === 'dev') {
+      deps = devDependencies;
+    } else {
+      deps = dependencies || {};
+    }
+
+    const _deps =  Object.keys(deps).map(k => {
+      const obj = {
+        name: k,
+        version: deps[k],
+        latest: '-'
+      };
+      if(upgraded[k]) {
+        obj.latest = upgraded[k];
+      }
+      return obj;
+    });
+
+    return res.json({ dependencies: _deps});
   });
 
   app.post('/terminals', (req, res) => {
