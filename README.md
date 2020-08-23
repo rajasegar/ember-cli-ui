@@ -1,6 +1,8 @@
 # ember-cli-ui
+[![npm version](http://img.shields.io/npm/v/ember-cli-ui.svg?style=flat)](https://npmjs.org/package/ember-cli-ui "View this project on npm")
 
-![logo](public/assets/images/logo.png)
+
+![logo](screenshots/logo.png)
 
 [ember-cli](https://cli.emberjs.com/release/) in the browser to create and manage your
 Ember projects using GUI
