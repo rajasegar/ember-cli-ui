@@ -9,7 +9,7 @@
     <tbody>
       {{#each items as |d|}}
         <tr>
-          <td>{{d.name}}</td>
+          <td><a href="https://npmjs.com/package/{{d.name}}">{{d.name}}</a></td>
           <td>{{d.version}}</td>
           <td>{{d.latest}}</td>
           <td><SemverBadge @type={{d.diff}}/></td>

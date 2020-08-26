@@ -8,10 +8,10 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const ncu = require('npm-check-updates');
 const buffer = require('./buffer');
-const bufferUtf8 = require('./bufferUtf8');
+// const bufferUtf8 = require('./bufferUtf8');
 
 // Whether to use binary transport.
-const USE_BINARY = os.platform() !== "win32";
+// const USE_BINARY = os.platform() !== "win32";
 
 function startServer(projectPath) {
   //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
@@ -22,7 +22,7 @@ function startServer(projectPath) {
   const terminals = {};
   const logs = {};
 
-  app.get('/', (req, res) => { 
+  app.get('/', (req, res) => {
     const indexFile = path.join(__dirname, '..',   'dist/index.html');
     res.sendFile(indexFile);
   });
@@ -30,7 +30,7 @@ function startServer(projectPath) {
   app.use('/assets', express.static(path.join(__dirname, '..', 'dist/assets')));
 
   app.get('/project', (req,res) => {
-    const manifestPath =`${projectPath}/package.json`; 
+    const manifestPath =`${projectPath}/package.json`;
     if(fs.existsSync(manifestPath)) {
     res.json(require(manifestPath));
     } else {
@@ -40,7 +40,7 @@ function startServer(projectPath) {
 
   app.get('/dependencies', async (req, res) => {
     const upgraded = await ncu.run();
-    const manifestPath =`${projectPath}/package.json`; 
+    const manifestPath =`${projectPath}/package.json`;
     const manifest = require(manifestPath);
     const { devDependencies, dependencies } = manifest;
     let deps;
@@ -84,7 +84,8 @@ function startServer(projectPath) {
         rows: rows || 24,
         cwd: projectPath,
         env: env,
-        encoding: USE_BINARY ? null : 'utf8'
+        // encoding: USE_BINARY ? null : 'utf8'
+        encoding:  'utf8'
       });
 
       term.write('clear\r');
@@ -124,7 +125,8 @@ function startServer(projectPath) {
     console.log('Connected to terminal ' + term.pid);
     ws.send(logs[term.pid]);
 
-    const send = USE_BINARY ? bufferUtf8(ws, 5) : buffer(ws, 5);
+    // const send = USE_BINARY ? bufferUtf8(ws, 5) : buffer(ws, 5);
+    const send =  buffer(ws, 5);
 
     term.on('data', function(data) {
       try {

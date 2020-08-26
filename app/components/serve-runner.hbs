@@ -1,3 +1,4 @@
-<button type="button" {{on "click" this.startServer}}><FaIcon @icon="play"/> Start</button>
-<button type="button" {{on "click" this.stopServer}}><FaIcon @icon="stop"/> Stop</button>
-<Terminal @command={{this.command}} @task="serve"/>
+<button type="button" {{on "click" this.toggleServe}} disabled={{this.disabled}}>
+  <FaIcon @icon={{this.icon}}/> {{this.label}}
+</button>
+<Terminal @command={{this.command}} @task="serve" @callback={{this.socketCallback}} />

@@ -45,7 +45,7 @@ export default class CreateXtermModifier extends Modifier {
 
 
       const url = new URL(`${location.origin}/terminals`);
-      const params = { 
+      const params = {
         cols: this.term.cols,
         rows: this.term.rows,
         task: task
@@ -61,6 +61,11 @@ export default class CreateXtermModifier extends Modifier {
             this.term.loadAddon(new AttachAddon(this.socket));
             this.term._initialized = true;
           };
+          this.socket.onmessage = (event) => {
+            if(this.args.named.callback) {
+            this.args.named.callback(event);
+            }
+          }
           this.socket.onclose = () => {};
           this.socket.onerror = () => {};
         });

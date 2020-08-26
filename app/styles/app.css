@@ -50,6 +50,9 @@ nav ul li a {
   padding: 0.5em;
 }
 
+nav ul li a:hover {
+  background: var(--burnt-ember);
+}
 nav ul li a.active {
   color: var(--ember);
   background: var(--linen);
@@ -74,6 +77,16 @@ button {
 button:hover {
   background: var(--ember);
   color: var(--white);
+}
+
+button[disabled] {
+  color: var(--gray);
+  border:1px solid var(--gray);
+  cursor: not-allowed;
+}
+
+button[disabled]:hover {
+  background: none;
 }
 
 .right_col {
