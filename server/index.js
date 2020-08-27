@@ -65,6 +65,7 @@ function startServer(projectPath) {
     return res.json({ dependencies: _deps});
   });
 
+
   app.post('/terminals', (req, res) => {
     const env = Object.assign({}, process.env);
     env['COLORTERM'] = 'truecolor';
@@ -109,19 +110,19 @@ function startServer(projectPath) {
 
   // TODO: Change pid reference to task
   app.post('/terminals/:pid/size', (req, res) => {
-    const pid = parseInt(req.params.pid),
-      cols = parseInt(req.query.cols),
-      rows = parseInt(req.query.rows),
-      term = terminals[pid];
+    const pid = parseInt(req.params.pid);
+    const cols = parseInt(req.query.cols);
+    const rows = parseInt(req.query.rows);
+    const term = terminals[pid];
 
     term.resize(cols, rows);
     console.log('Resized terminal ' + pid + ' to ' + cols + ' cols and ' + rows + ' rows.');
     res.end();
   });
 
-  // TODO: Change pid reference to task
-  app.ws('/terminals/:pid', function (ws, req) {
-    const term = terminals[req.params.pid];
+  app.ws('/terminals/:termid', function (ws, req) {
+    const termId = req.params.termid;
+    const term = terminals[termId];
     console.log('Connected to terminal ' + term.pid);
     ws.send(logs[term.pid]);
 
@@ -147,7 +148,7 @@ function startServer(projectPath) {
       term.kill();
       console.log('Closed terminal ' + term.pid);
       // Clean things up
-      delete terminals[term.pid];
+      delete terminals[termId];
       delete logs[term.pid];
     });
   });

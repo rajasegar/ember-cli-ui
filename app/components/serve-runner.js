@@ -29,17 +29,8 @@ export default class ServeRunnerComponent extends Component {
   }
 
   @action
-  startServer() {
-    this.command = 'npm start\r\n';
-  }
-
-  @action
-  stopServer() {
-    this.command = '\x03';
-  }
-
-  @action
   socketCallback(message) {
+    if(message && message.data) {
     if(message.data.includes('Build successful')) {
       this.isBuildRunning = true;
       this.disabled = false;
@@ -48,6 +39,7 @@ export default class ServeRunnerComponent extends Component {
     if(message.data.includes('ERR')) {
       this.isBuildRunning = false;
       this.disabled = false;
+    }
     }
   }
 

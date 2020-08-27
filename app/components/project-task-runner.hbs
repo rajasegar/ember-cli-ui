@@ -1,6 +1,6 @@
 <label for="task">Task: </label>
 <select id="task" {{on "change" this.updateTask}}>
-  {{#each @tasks as |t|}}
+  {{#each this.project.tasks as |t|}}
     <option value={{t.name}}>{{t.name}}</option>
   {{/each}}
 </select>

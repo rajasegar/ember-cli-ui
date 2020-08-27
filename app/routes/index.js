@@ -1,20 +1,14 @@
 import Route from '@ember/routing/route';
+import { inject as service } from '@ember/service';
 
 export default class IndexRoute extends Route {
+  @service project;
 
-   async model() {
-    const response = await fetch('/project');
-    const project = await response.json();
-
-    return { project };
-  }
-
-afterModel(model) {
-  // Empty manifest or not an Ember project
-  const { project } = model;
-  const hasCli = project.devDependencies && project.devDependencies['ember-cli'];
-    if (Object.keys(model.project) === 0 || !hasCli) {
+  afterModel() {
+    // Empty manifest or not an Ember project
+    if (!this.project.isEmberProject) {
       this.transitionTo('new-project');
     }
+
   }
 }
