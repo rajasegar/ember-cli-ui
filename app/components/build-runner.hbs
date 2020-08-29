@@ -1,35 +1,44 @@
-<button type="button" {{on "click" this.runBuild}} disabled={{this.disabled}}><FaIcon @icon="file-archive" /> Build</button>
+<div class="build-actions">
+  <button type="button" {{on "click" this.runBuild}} disabled={{this.disabled}}><FaIcon @icon="file-archive" /> Build Project</button>
+  <button type="button" {{on "click" this.toggleLog}} ><FaIcon @icon="list" /> {{this.logBtnLabel}}</button>
+</div>
 
-{{#async-await this.assets as |items|}}
-<table>
-  <thead>
-    <th>Asset Name</th>
-    <th>Size</th>
-    <th>gzipped</th>
-    <th>Download Time</th>
-  </thead>
-  <tbody>
-  {{#each items as |i|}}
-    <tr>
-      <td>{{i.name}}</td>
-      <td>{{i.size}}</td>
-      <td>{{i.gzipSize}}</td>
-      <td>
-        <a href="#">Show
-        <EmberTooltip  @side="right">
-        <SpeedData @data={{i.speeds}}/>
-        </EmberTooltip>
-        </a>
-      </td>
-      {{log i.speeds}}
-    </tr>
-      {{/each}}
-  </tbody>
-</table>
-{{else}}
   {{#if showSpinner}}
-  <LoadingSpinner/>
-  {{/if}}
-  {{/async-await}}
-  <br/>
-<Terminal @command={{this.command}} @task="build" @callback={{this.socketCallback}}/>
+    <h3>Building...</h3>
+    <LoadingSpinner/>
+   {{/if}}
+
+   {{#if this.buildReady}}
+  <table>
+    <thead>
+      <th>Asset Name</th>
+      <th>Size</th>
+      <th>gzipped</th>
+      <th>Download Time</th>
+    </thead>
+    <tbody>
+      {{#each this.assets as |i|}}
+        <tr>
+          <td>{{i.name}}</td>
+          <td>{{i.size}}</td>
+          <td>{{i.gzipSize}}</td>
+          <td>
+            <a href="#">Show
+              <EmberTooltip  @side="right" class="wide-tooltip">
+              <SpeedData @data={{i.speeds}}/>
+              </EmberTooltip>
+            </a>
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+   {{/if}}
+
+{{#if this.showLog}}
+<div class="build-log">
+  {{#each this.logs as |log|}}
+    <p>{{log}}</p>
+  {{/each}}
+</div>
+{{/if}}

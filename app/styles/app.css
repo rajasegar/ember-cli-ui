@@ -25,8 +25,8 @@ header {
 
 .header-wrapper {
   margin: 0.5em;
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  display: flex;
+  justify-content: space-around;
 }
 
 
@@ -211,4 +211,21 @@ table td, table th {
 @keyframes spin {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
+}
+
+.ember-tooltip {
+  min-width: 250px !important;
+}
+
+.build-log {
+  margin-top: 1em;
+  background: var(--faint-gray);
+  border: solid 1px var(--gray);
+  border-radius: 4px;
+  padding: 1em;
+  min-height:50px;
+}
+
+.date-time-wrapper {
+  margin-right: 1em;
 }

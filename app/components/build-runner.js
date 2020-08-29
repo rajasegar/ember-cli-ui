@@ -4,29 +4,38 @@ import { tracked } from '@glimmer/tracking';
 
 export default class BuildRunnerComponent extends Component {
 
-  @tracked command;
   @tracked disabled = false;
   @tracked showSpinner = false;
-  @tracked assets;
+  @tracked assets = [];
+  @tracked showLog = false;
+  @tracked logs = [];
+  @tracked buildReady = false;
 
   @action
   runBuild() {
-    this.command  = `npm run build\r\n`;
+    this.showSpinner = true;
     this.disabled = true;
+    fetch('/build')
+      .then(res => res.json())
+      .then(response => {
+        //console.log(response);
+        this.logs = response.logs;
+        this.assets = response.assets;
+
+        this.showSpinner = false;
+        this.disabled = false;
+        this.buildReady = true;
+      });
+
   }
 
   @action
-  socketCallback(msg) {
+  toggleLog() {
+    this.showLog = !this.showLog;
+  }
 
-    if(msg.data.includes('Built project successfully.')) {
-      this.disabled = false;
-      this.showSpinner = true;
-      this.assets =  fetch('/assets')
-      .then(res => res.json())
-      .then(data => {
-      return data;
-    });
-    }
+  get logBtnLabel() {
+    return this.showLog ? 'Hide Log' : 'Show Log';
   }
 
 }

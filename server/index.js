@@ -12,7 +12,8 @@ const walkSync = require('walk-sync');
 const zlib = require('zlib');
 const { getSpeeds } = require('./utils/assets.js');
 const filesize = require('filesize');
-//const cli = require('ember-cli/lib/cli');
+const cli = require('ember-cli/lib/cli');
+const { Writable } = require('stream');
 
 function startServer(projectPath) {
   //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
@@ -61,17 +62,43 @@ function startServer(projectPath) {
     res.json(files);
   });
 
-  //app.get('/serve', async (req, res) => {
-    //const result = await cli({
-      //cliArgs: ['serve'],
-      //inputStream: process.stdin,
-      //outputStream: process.stdout,
-      //errorStream: process.stderr
-    //})
+  app.get('/build', async (req, res) => {
+    const buildLogs = [];
+    const logStream = new Writable({
+      objectMode: true,
+      write: (data, _, done) => {
+        console.log('<-', data.toString());
+        buildLogs.push(data.toString());
+        done();
+      }
+    });
 
-    //res.json(result);
 
-  //});
+    const result = await cli({
+      cliArgs: ['build', '-prod'],
+      inputStream: process.stdin,
+      outputStream: logStream,
+      errorStream: process.stderr
+    })
+    const assets = walkSync(`${projectPath}/dist/assets`, { globs: ['*.js','*.css'] }).map(file => {
+
+      const filePath = `${projectPath}/dist/assets/${file}`;
+      let contentsBuffer = fs.readFileSync(filePath);
+      let output = {
+        name: file,
+        size: filesize(contentsBuffer.length),
+      };
+
+      const gzipSize = contentsBuffer.length > 0 ? zlib.gzipSync(contentsBuffer).length : 0;
+      output.gzipSize = filesize(gzipSize);
+      output.speeds = getSpeeds(gzipSize);
+
+      return output;
+    });
+ 
+    res.json({ result, logs: buildLogs, assets });
+
+  });
 
   app.get('/dependencies', async (req, res) => {
     const upgraded = await ncu.run();
