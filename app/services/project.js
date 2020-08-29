@@ -66,4 +66,8 @@ export default class ProjectService extends Service {
 
   }
 
+  get projectPath() {
+    return this.project.projectPath;
+  }
+
 }

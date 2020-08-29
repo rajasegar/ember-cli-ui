@@ -1,2 +1,35 @@
-<button type="button" {{on "click" this.runBuild}}><FaIcon @icon="file-archive"/> Build</button>
-<Terminal @command={{this.command}} @task="build"/>
+<button type="button" {{on "click" this.runBuild}} disabled={{this.disabled}}><FaIcon @icon="file-archive" /> Build</button>
+
+{{#async-await this.assets as |items|}}
+<table>
+  <thead>
+    <th>Asset Name</th>
+    <th>Size</th>
+    <th>gzipped</th>
+    <th>Speed Data</th>
+  </thead>
+  <tbody>
+  {{#each items as |i|}}
+    <tr>
+      <td>{{i.name}}</td>
+      <td>{{i.size}}</td>
+      <td>{{i.gzipSize}}</td>
+      <td>
+        <a href="#">Speed Data
+        <EmberTooltip  @side="right">
+        <SpeedData @data={{i.speeds}}/>
+        </EmberTooltip>
+        </a>
+      </td>
+      {{log i.speeds}}
+    </tr>
+      {{/each}}
+  </tbody>
+</table>
+{{else}}
+  {{#if showSpinner}}
+  <LoadingSpinner/>
+  {{/if}}
+  {{/async-await}}
+  <br/>
+<Terminal @command={{this.command}} @task="build" @callback={{this.socketCallback}}/>

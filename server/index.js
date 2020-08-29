@@ -8,10 +8,11 @@ const { exec } = require('child_process');
 const fs = require('fs');
 const ncu = require('npm-check-updates');
 const buffer = require('./buffer');
-// const bufferUtf8 = require('./bufferUtf8');
-
-// Whether to use binary transport.
-// const USE_BINARY = os.platform() !== "win32";
+const walkSync = require('walk-sync');
+const zlib = require('zlib');
+const { getSpeeds } = require('./utils/assets.js');
+const filesize = require('filesize');
+//const cli = require('ember-cli/lib/cli');
 
 function startServer(projectPath) {
   //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
@@ -32,11 +33,45 @@ function startServer(projectPath) {
   app.get('/project', (req,res) => {
     const manifestPath =`${projectPath}/package.json`;
     if(fs.existsSync(manifestPath)) {
-    res.json(require(manifestPath));
+      const manifest = require(manifestPath);
+      manifest.projectPath = projectPath;
+      res.json(manifest);
     } else {
       res.json({});
     }
   });
+
+  app.get('/assets', (req, res) => {
+
+    const files = walkSync(`${projectPath}/dist/assets`, { globs: ['*.js','*.css'] }).map(file => {
+
+      const filePath = `${projectPath}/dist/assets/${file}`;
+      let contentsBuffer = fs.readFileSync(filePath);
+      let output = {
+        name: file,
+        size: filesize(contentsBuffer.length),
+      };
+
+      const gzipSize = contentsBuffer.length > 0 ? zlib.gzipSync(contentsBuffer).length : 0;
+      output.gzipSize = filesize(gzipSize);
+      output.speeds = getSpeeds(gzipSize);
+
+      return output;
+    });
+    res.json(files);
+  });
+
+  //app.get('/serve', async (req, res) => {
+    //const result = await cli({
+      //cliArgs: ['serve'],
+      //inputStream: process.stdin,
+      //outputStream: process.stdout,
+      //errorStream: process.stderr
+    //})
+
+    //res.json(result);
+
+  //});
 
   app.get('/dependencies', async (req, res) => {
     const upgraded = await ncu.run();

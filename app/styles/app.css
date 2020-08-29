@@ -14,6 +14,26 @@ body {
   border: none;
 }
 
+header {
+  position:fixed;
+  top: 0;
+  left: 200px;
+  width: 100%;
+  background: var(--white);
+  color: var(--gray);
+}
+
+.header-wrapper {
+  margin: 0.5em;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+
+header p {
+  margin: 0.5em;
+}
+
 .logo {
   width: 90%;
   margin: 0.5em 0;
@@ -91,7 +111,7 @@ button[disabled]:hover {
 
 .right_col {
   padding: 1em;
-  margin-bottom: 3em;
+  margin: 2em 0 3em 0;
   max-height: 100vh;
   overflow: auto;
 }

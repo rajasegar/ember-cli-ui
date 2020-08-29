@@ -39,6 +39,21 @@
     </ul>
   </nav>
   <div class="right_col">
+    <header>
+      <div class="header-wrapper">
+      <div><FaIcon @icon="suitcase"/> {{this.project.name}}</div>
+      <div><FaIcon @icon="folder"/> {{this.project.projectPath}}  </div>
+      <div>
+
+        <span class="text-right">
+        {{this.datetime}} | 
+      <a href="https://github.com/rajasegar/ember-cli-ui/issues">
+          <FaIcon @icon="bug"/>
+        </a>
+        </span>
+      </div>
+      </div>
+    </header>
     {{outlet}}
     <footer>
       <p class="text-center">
