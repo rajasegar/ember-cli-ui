@@ -1,6 +1,7 @@
 import Component from '@glimmer/component';
 import { action } from '@ember/object';
 import { tracked } from '@glimmer/tracking';
+import { htmlSafe } from '@ember/template';
 
 export default class BuildRunnerComponent extends Component {
 
@@ -19,7 +20,7 @@ export default class BuildRunnerComponent extends Component {
       .then(res => res.json())
       .then(response => {
         //console.log(response);
-        this.logs = response.logs;
+        this.logs = response.logs.map(l => htmlSafe(l));
         this.assets = response.assets;
 
         this.showSpinner = false;

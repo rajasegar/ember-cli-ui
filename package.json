@@ -69,12 +69,14 @@
     "edition": "octane"
   },
   "dependencies": {
+    "ansi_up": "^4.0.4",
     "express": "^4.10.7",
     "express-ws": "^4.0.0",
     "filesize": "^6.1.0",
     "get-port": "^5.1.1",
     "node-pty": "^0.9.0",
     "npm-check-updates": "^7.1.1",
+    "resolve": "^1.17.0",
     "semver": "^7.3.2",
     "walk-sync": "^2.2.0",
     "xterm": "^4.8.1",

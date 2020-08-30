@@ -41,7 +41,7 @@ export default class ProjectService extends Service {
   }
 
   get edition() {
-    return this.project.ember.edition;
+    return this.project.ember &&  this.project.ember.edition || '';
   }
 
   get node() {

@@ -7,13 +7,12 @@ const getPort = require('get-port');
 const { exec } = require('child_process');
 const fs = require('fs');
 const ncu = require('npm-check-updates');
-const buffer = require('./buffer');
-const walkSync = require('walk-sync');
-const zlib = require('zlib');
-const { getSpeeds } = require('./utils/assets.js');
-const filesize = require('filesize');
-const cli = require('ember-cli/lib/cli');
+const buffer = require('./utils/buffer');
+const getBuildAssets = require('./utils/getBuildAssets');
 const { Writable } = require('stream');
+const AU = require('ansi_up');
+const ansi_up = new AU.default;
+const resolve = require('resolve');
 
 function startServer(projectPath) {
   //projectPath =  '/Users/rajasegarchandran/www/super-rentals';
@@ -44,59 +43,56 @@ function startServer(projectPath) {
 
   app.get('/assets', (req, res) => {
 
-    const files = walkSync(`${projectPath}/dist/assets`, { globs: ['*.js','*.css'] }).map(file => {
+    const files = getBuildAssets(projectPath);
 
-      const filePath = `${projectPath}/dist/assets/${file}`;
-      let contentsBuffer = fs.readFileSync(filePath);
-      let output = {
-        name: file,
-        size: filesize(contentsBuffer.length),
-      };
-
-      const gzipSize = contentsBuffer.length > 0 ? zlib.gzipSync(contentsBuffer).length : 0;
-      output.gzipSize = filesize(gzipSize);
-      output.speeds = getSpeeds(gzipSize);
-
-      return output;
-    });
     res.json(files);
   });
 
   app.get('/build', async (req, res) => {
     const buildLogs = [];
+    const errLogs = [];
     const logStream = new Writable({
       objectMode: true,
       write: (data, _, done) => {
         console.log('<-', data.toString());
-        buildLogs.push(data.toString());
+        buildLogs.push(ansi_up.ansi_to_html(data.toString()));
         done();
       }
     });
+
+    const errStream = new Writable({
+      objectMode: true,
+      write: (data, _, done) => {
+        console.log('<-', data.toString());
+        errLogs.push(ansi_up.ansi_to_html(data.toString()));
+        done();
+      }
+    });
+
+    let projectLocalCli;
+    try {
+      projectLocalCli = resolve.sync('ember-cli', {
+        basedir: projectPath
+      });
+    } catch(ignored) {} // eslint-disable-line
+
+    console.log('Resolved "ember-cli" to %j', projectLocalCli);
+
+    // Load `ember-cli` either from the project-local path, or if it could not
+    // be resolved use the global version
+    var cli = require(projectLocalCli || 'ember-cli/lib/cli');
 
 
     const result = await cli({
       cliArgs: ['build', '-prod'],
       inputStream: process.stdin,
       outputStream: logStream,
-      errorStream: process.stderr
+      errorStream: errStream
     })
-    const assets = walkSync(`${projectPath}/dist/assets`, { globs: ['*.js','*.css'] }).map(file => {
 
-      const filePath = `${projectPath}/dist/assets/${file}`;
-      let contentsBuffer = fs.readFileSync(filePath);
-      let output = {
-        name: file,
-        size: filesize(contentsBuffer.length),
-      };
+    const assets = getBuildAssets(projectPath);
 
-      const gzipSize = contentsBuffer.length > 0 ? zlib.gzipSync(contentsBuffer).length : 0;
-      output.gzipSize = filesize(gzipSize);
-      output.speeds = getSpeeds(gzipSize);
-
-      return output;
-    });
- 
-    res.json({ result, logs: buildLogs, assets });
+    res.json({ result, logs: buildLogs, assets, errLogs });
 
   });
 
