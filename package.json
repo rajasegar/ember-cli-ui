@@ -71,6 +71,7 @@
     "edition": "octane"
   },
   "dependencies": {
+    "@tailwindcss/ui": "^0.6.2",
     "ansi_up": "^4.0.4",
     "daemon": "github:zipang/daemon.node#48d0977c26fb3a6a44ae99aae3471b9d5a761085",
     "express": "^4.10.7",
