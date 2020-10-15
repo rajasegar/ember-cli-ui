@@ -1,57 +1,83 @@
-<div class="new-project-wrapper">
-  <div class="project-options">
-    <label for="name">Project Name: </label>
-    <Input type="text" id="name" @value={{this.name}}/>
+<div class="wrapper">
+  <div class="flex gap-5 flex-col">
+    <div class="box">
+      <div class="input">
+        <label class="input-label" for="name"> Project Name </label>
+        <Input type="text" class="input-box" id="name" @value={{this.name}} />
+      </div>
 
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleDryRun}}/>
-      --dry-run (-d)</label>
-    </p>
+      <div class="input">
+        <label class="input-label">Blueprint</label>
+        <Input @type="text" class="input-box" {{on 'input' this.updateBlueprint }} />
+      </div>
 
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleVerbose}}/>
-      --verbose (-v)</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleSkipNpm}}/>
-      --skip-npm (-sn)</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleSkipGit}}/>
-      --skip-git (-sg)</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleSkipBower}}/>
-      --skip-bower (-sb)</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleYarn}}/>
-      --yarn</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleWelcome}}/>
-      --no-welcome</label>
-    </p>
-    <p>
-    <label>Blueprint:</label>
-    <Input @type="text" {{on 'input' this.updateBlueprint }}/>
-    </p>
-    <p>
-    <label>Directory:</label>
-    <Input @type="text" {{on 'input' this.updateDirectory }}/>
-    </p>
+      <div class="input">
+        <label class="input-label">Directory</label>
+        <Input @type="text" class="input-box" {{on 'input' this.updateDirectory }} />
+      </div>
+      <div class="my-3">
+        <h3 class=" text-xl border-t border-gray-800 pt-4">Options</h3>
+        <p class="text-sm text-gray-600">Flags that will be added to your build command</p>
+      </div>
+      <div class="flex flex-wrap gap-5">
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleDryRun}} />
+            <span class="text-gray-500">Dry-run</span></label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleVerbose}} />
+            <span class="text-gray-500">verbose</span>
+          </label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleSkipNpm}} />
+            <span class="text-gray-500">Skip-npm</span></label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleSkipGit}} />
+            <span class="text-gray-500">Skip-git</span>
+          </label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <span class="text-gray-500">skip-bower</span>
+          </label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleYarn}} />
+            <span class="text-gray-500">Yarn</span>
+          </label>
+        </div>
+
+        <div class="build-option">
+          <label class="flex items-center">
+            <Input class="hidden" @type="checkbox" {{on 'click' this.toggleWelcome}} />
+            <span class="text-gray-500">no-welcome</span>
+          </label>
+        </div>
+      </div>
+
+    </div>
+    <div>
+      <button type="button" class="button-action" {{on "click" this.createNewProject}}>
+        Create New Project
+      </button>
+    </div>
 
   </div>
-  <div class="terminal">
-    <button type="button" {{on "click" this.createNewProject}}><FaIcon @icon="folder-plus"/> Create New Project</button>
-    <Terminal @command={{this.command}} @task="new"/>
+
+  <div class="terminal h-full">
+
+    <Terminal @command={{this.command}} @task="new" />
   </div>
 </div>
-

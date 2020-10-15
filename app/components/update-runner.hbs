@@ -1,46 +1,48 @@
-<div class="new-project-wrapper">
-  <div class="update-options">
-    <p>
+<div class="wrapper">
+  <div class="box">
+    <div class="input">
     <label for="toversion">To Version: </label>
-    <Input type="text" id="toversion" @value={{this.toVersion}}/>
-    </p>
+    <Input class="input-box" type="text" id="toversion" @value={{this.toVersion}}/>
+    </div>
 
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleResolveConflicts}}/>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleResolveConflicts}}/>
       --resolve-conflicts</label>
-    </p>
+    </div>
 
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleRunCodemods}}/>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleRunCodemods}}/>
       --run-codemods</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleReset}}/>
+    </div>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleReset}}/>
       --reset</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleCompare}}/>
+    </div>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleCompare}}/>
       --compare-only</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleStats}}/>
+    </div>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleStats}}/>
       --stats-only</label>
-    </p>
-    <p>
-    <label>
-      <Input @type="checkbox" {{on 'click' this.toggleListCodemods}}/>
+    </div>
+    <div class="input">
+    <label class="input-label">
+      <Input class="input-box" @type="checkbox" {{on 'click' this.toggleListCodemods}}/>
       --list-codemods</label>
-    </p>
+    </div>
   </div>
   <div class="terminal">
-    <button type="button" {{on 'click' this.installEcu }}><FaIcon @icon="download"/> Install ember-cli-update</button>
-    <button type="button" {{on 'click' this.runUpdate }}><FaIcon @icon="play"/> Run Update</button>
-    <button type="button" {{on 'click' this.resetProject }}><FaIcon @icon="undo"/> Reset Project</button>
+    <div>
+    <button class="button-action" type="button" {{on 'click' this.installEcu }}><FaIcon @icon="download"/> Install ember-cli-update</button>
+    <button class="button-action" type="button" {{on 'click' this.runUpdate }}><FaIcon @icon="play"/> Run Update</button>
+    <button class="button-action" type="button" {{on 'click' this.resetProject }}><FaIcon @icon="undo"/> Reset Project</button>
+    </div>
     <Terminal @command={{this.command}} @task="update"/>
   </div>
 </div>

@@ -1,10 +1,25 @@
-<label for="blueprint">Blueprint: </label>
-<select id="blueprint" {{on "change" this.updateBlueprint}}>
-  {{#each this.blueprints as |b|}}
-  <option value={{b.value}}>{{b.title}}</option>
-{{/each}}
-</select>
-<label for="name">Name: </label>
-<Input id="name" type="text" placeholder="hello-world" @value={{this.name}}/>
-<button type="button" {{on "click" this.runGenerate}}><FaIcon @icon="plus-square"/> Generate</button>
-<Terminal @command={{this.command}} @task="generate"/>
+<div class="wrapper">
+  <div class="flex-grid">
+    <div class="box">
+      <div class="input">
+      <label class="input-label" for="blueprint">Blueprint: </label>
+      <select class="input-box" id="blueprint" {{on "change" this.updateBlueprint}}>
+        {{#each this.blueprints as |b|}}
+        <option value={{b.value}}>{{b.title}}</option>
+        {{/each}}
+      </select>
+      </div>
+      <div class="input">
+  
+      <label class="input-label" for="name">Name: </label>
+      <Input class="input-box" id="name" type="text" placeholder="hello-world" @value={{this.name}} />
+      </div>
+    </div>
+    <div>
+      <button class="button-action" type="button" {{on "click" this.runGenerate}}>
+        <FaIcon @icon="plus-square" /> Generate</button>
+    </div>
+
+  </div>
+  <Terminal @command={{this.command}} @task="generate" />
+</div>
