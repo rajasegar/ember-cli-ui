@@ -10,14 +10,47 @@
 
 @layer components {
 
-  /* GLOBAL */
+  /* 
+  * APPLICATION 
+  */
+
+  .application-layout{
+    @apply grid grid-rows-2 grid-cols-12 gap-5 p-5 min-h-screen bg-gray-800  
+  }
+
+  /* NAVIGATION */
+
+  .nav-container{ 
+    @apply rounded-lg row-span-2 col-span-2 bg-gray-900 py-12 px-6
+  }
+
+  .nav-inner {
+    @apply flex flex-col  overflow-y-auto pt-0 flex-grow
+  }
+
+  .nav-sub{
+    @apply font-bold px-2 py-2 text-gray-500 mt-4;
+  }
+
+  .nav-link {
+    @apply flex items-center px-3 py-3 mb-1 leading-6 font-medium rounded text-gray-400;
+  }
+
+  .nav-link:hover, .nav-link:focus {
+    @apply text-white bg-gray-800; 
+  }
+
+  .nav-link--svg {
+    @apply mr-5 h-6 w-6 text-gray-500; 
+  }
+
 
   .main-container{
-    @apply flex-grow relative bg-gray-800 flex flex-col
+    @apply relative flex flex-col col-span-10 row-span-2 bg-gray-800 
   }
 
   .main-inner {
-    @apply w-full text-white p-12 mb-5 flex-grow
+    @apply w-full p-5 mb-5 flex-grow text-white
   }
 
   .input{
@@ -33,22 +66,22 @@
   }
 
   .button-action{
-    @apply bg-orange-600 py-2 px-4 mb-4 block
+    @apply bg-orange-600 py-2 px-6 w-40 mb-4 block rounded-lg
   }
 
   .meta-bar{
-    @apply h-6 z-10 bg-orange-600 flex  
+    @apply flex col-span-12 h-10 z-10 rounded-lg bg-orange-600
   }
 
   .flex-grid{
-    @apply flex gap-5 flex-col
+    @apply flex flex-col
   }
   .flex-grid--row{
-    @apply flex gap-5 flex-row
+    @apply flex flex-row
   }
 
   .box{
-    @apply bg-gray-900 border border-gray-600 w-auto p-12 h-auto
+    @apply bg-gray-900 w-auto p-10 h-auto rounded-lg
   }
 
   .box-button{
@@ -56,13 +89,17 @@
   }
 
   .terminal{
-    @apply p-4 bg-black
+    @apply p-4 bg-black rounded-lg
   }
 
   /* HEADER */
 
   .header{
-    @apply w-full text-white p-4 border-b border-gray-700 flex
+    @apply w-full p-5 
+  }
+
+  .header-inner{
+    @apply flex w-full py-3 px-6 rounded-lg bg-gray-900
   }
 
   .header-icon{
@@ -74,35 +111,10 @@
   }
 
   .header-sub{
-    @apply text-sm text-gray-500 font-bold
+    @apply text-sm text-gray-500 
   }
 
-  /* NAVIGATION */
-
-  .menu-container{ 
-    @apply flex flex-col bg-gray-900
-  }
-
-  .menu-inner {
-    @apply mt-5 flex-1 flex flex-col overflow-y-auto px-3 w-64
-  }
-
-  .menu-sub{
-    @apply text-white font-bold px-2 py-2 text-gray-500 mt-4;
-  }
-
-  .nav-link {
-    @apply flex items-center px-3 py-2 mb-1 leading-6 font-medium rounded text-gray-400;
-  }
-
-  .nav-link:hover, .nav-link:focus {
-    @apply text-white bg-gray-800; 
-  }
-
-  .nav-link--svg {
-    @apply mr-5 h-6 w-6 text-gray-500; 
-  }
-
+  
   /* NEW-PROJECT.HBS */
 
   .build-option {

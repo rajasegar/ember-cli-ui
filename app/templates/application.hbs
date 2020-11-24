@@ -1,13 +1,15 @@
-<div class="w-full min-h-screen flex flex-col bg-black">
-  <div class="w-full flex flex-grow">
-    <NavigationBar/>
-    <main class="main-container">
-      {{outlet}}
-    </main>
-  </div>
+<div class="application-layout">
+
+  <NavigationBar/>
+
+  <main class="main-container">
+    {{outlet}}
+  </main>
+
   <div class="meta-bar">
     <p class="text-orange-200 text-sm m-auto"> Made with <span class="text-ember">&hearts;</span> for the <a href="https://emberjs.com">Ember.js</a> community. Source code on <a href="https://github.com/rajasegar/ember-cli-ui">Github</a></p>
   </div>
+  
 </div>
 
 
