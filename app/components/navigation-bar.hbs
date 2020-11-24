@@ -1,0 +1,117 @@
+<div class="nav-container">
+      <div class="px-4 py-6  m-auto">
+        <img class="h-8 w-auto" src="/assets/images/logo.png" alt="Ember cli ui">
+      </div>
+        <nav class="nav-inner">
+          <h2 class="nav-sub">Tasks</h2>
+          <LinkTo @route="serve" class="group nav-link ">
+            <svg class="nav-link--svg group-hover:text-orange-500 " fill="none" stroke="currentColor"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M14 10l-2 1m0 0l-2-1m2 1v2.5M20 7l-2 1m2-1l-2-1m2 1v2.5M14 4l-2-1-2 1M4 7l2-1M4 7l2 1M4 7v2.5M12 21l-2-1m2 1l2-1m-2 1v-2.5M6 18l-2-1v-2.5M18 18l2-1v-2.5">
+              </path>
+            </svg>
+            Serve
+          </LinkTo>
+
+          <LinkTo @route="test" class="group nav-link">
+
+            <svg class="nav-link--svg group-hover:text-orange-500 " fill="none" stroke="currentColor"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z">
+              </path>
+            </svg>
+            Test
+          </LinkTo>
+
+          <LinkTo @route="lint" class="group nav-link">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z">
+              </path>
+            </svg>
+            Lint
+          </LinkTo>
+
+          <LinkTo @route="generate" class="group nav-link">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Generate
+          </LinkTo>
+
+          <LinkTo @route="destroy" class="group nav-link">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            Destroy
+          </LinkTo>
+
+          <LinkTo @route="install" class="group nav-link">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+            </svg>
+            Install
+          </LinkTo>
+
+          <LinkTo @route="build" class="group nav-link">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z">
+              </path>
+            </svg>
+            build
+          </LinkTo>
+
+          <h2 class="nav-sub ">Project</h2>
+          <LinkTo @route="project-tasks" class="group nav-link ">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01">
+              </path>
+            </svg>
+            Tasks
+          </LinkTo>
+
+          <LinkTo @route="new-project" class="group nav-link ">
+            <svg class="nav-link--svg group-hover:text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z">
+              </path>
+            </svg>
+            New Project
+          </LinkTo>
+
+          <LinkTo @route="dependencies" class="group nav-link ">
+            <svg class="nav-link--svg group-hover:text-orange-500 " fill="none" stroke="currentColor"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path>
+            </svg>
+            Dependencies
+          </LinkTo>
+          <LinkTo @route="project-update" class="group nav-link ">
+            <svg class="nav-link--svg group-hover:text-orange-500 " fill="none" stroke="currentColor"
+              viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z">
+              </path>
+            </svg>
+            Update
+          </LinkTo>
+
+        </nav>
+    </div>
