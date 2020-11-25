@@ -1,231 +1,132 @@
-@import "_variables.css";
-@import "_typography.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
-@font-face {
-  font-family: 'Roboto';
-  src: url('/assets/fonts/Roboto/Roboto-Regular.ttf');
-}
+.shadow-orange{
 
-body {
-  font-family: 'Roboto', sans-serif;
-  background: var(--linen);
-  margin: 0;
-  padding: 0;
-  border: none;
-}
-
-header {
-  position:fixed;
-  top: 0;
-  left: 200px;
-  width: 100%;
-  background: var(--white);
-  color: var(--gray);
-}
-
-.header-wrapper {
-  margin: 0.5em;
-  display: flex;
-  justify-content: space-around;
+  box-shadow: 0px 0px 50px -10px rgba(255, 119, 0, 0.164);
 }
 
 
-header p {
-  margin: 0.5em;
-}
+@layer components {
 
-.logo {
-  width: 90%;
-  margin: 0.5em 0;
-}
-.main {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-}
+  /* 
+  * APPLICATION 
+  */
 
-nav {
-  background: var(--ember);
-  height: 100vh;
-  max-height: 100vh;
-}
+  .application-layout{
+    @apply grid grid-rows-2 grid-cols-12 gap-5 p-5 min-h-screen bg-gray-800  
+  }
 
-nav h1, h2, h3 {
-  padding-left: 0.5em;
-}
+  /* NAVIGATION */
 
+  .nav-container{ 
+    @apply rounded-lg row-span-2 col-span-2 bg-gray-900 py-12 px-6
+  }
 
-nav ul {
-  padding: 0;
-}
-nav ul li {
-  list-style: none;
-  display: flex;
-}
+  .nav-inner {
+    @apply flex flex-col  overflow-y-auto pt-0 flex-grow
+  }
 
-nav ul li a {
-  color: var(--white);
-  text-decoration: none;
-  display: block;
-  width: 100%;
-  padding: 0.5em;
-}
+  .nav-sub{
+    @apply font-bold px-2 py-2 text-gray-500 mt-4;
+  }
 
-nav ul li a:hover {
-  background: var(--burnt-ember);
-}
-nav ul li a.active {
-  color: var(--ember);
-  background: var(--linen);
-}
+  .nav-link {
+    @apply flex items-center px-3 py-3 mb-1 leading-6 font-medium rounded text-gray-400;
+  }
+
+  .nav-link:hover, .nav-link:focus {
+    @apply text-white bg-gray-800; 
+  }
+
+  .nav-link--svg {
+    @apply mr-5 h-6 w-6 text-gray-500; 
+  }
 
 
-h1,h2,h3,h4,h5,h6 {
-  color: var(--ember);
-}
+  .main-container{
+    @apply relative flex flex-col col-span-10 row-span-2 bg-gray-800 
+  }
 
-button {
-  margin: 1em;
-  padding: .75em;
-  color: var(--ember);
-  background: var(--white);
-  border:1px solid var(--ember);
-  border-radius: 4px;
-  cursor: pointer;
-  font-size:1em;
-}
+  .main-inner {
+    @apply w-full p-5 mb-5 flex-grow text-white
+  }
 
-button:hover {
-  background: var(--ember);
-  color: var(--white);
-}
+  .input{
+    @apply flex py-2 
+  }
 
-button[disabled] {
-  color: var(--gray);
-  border:1px solid var(--gray);
-  cursor: not-allowed;
-}
+  .input-label{
+    @apply py-2 w-48
+  }
 
-button[disabled]:hover {
-  background: none;
-}
+  .input-box{
+    @apply bg-gray-700 p-2 rounded-lg
+  }
 
-.right_col {
-  padding: 1em;
-  margin: 2em 0 3em 0;
-  max-height: 100vh;
-  overflow: auto;
-}
+  .button-action{
+    @apply bg-orange-600 py-2 px-6 w-40 mb-4 block rounded-lg
+  }
 
+  .meta-bar{
+    @apply flex col-span-12 h-10 z-10 rounded-lg bg-orange-600
+  }
 
-.terminal {
-  padding: 1em;
-}
+  .flex-grid{
+    @apply flex flex-col
+  }
+  .flex-grid--row{
+    @apply flex flex-row
+  }
 
-input[type="text"], select {
-  padding: 0 1em;
-  margin: 1em;
-  border: 1px solid var(--gray);
-  height: 40px;
-  color: var(--ember);
-  border-radius: 4px;
-  font-size: 1em;
-}
+  .box{
+    @apply bg-gray-900 w-auto p-10 h-auto rounded-lg
+  }
 
-.input--big {
-  width: 400px;
-}
+  .box-button{
+    @apply flex-1
+  }
 
-code {
-  background: var(--faint-gray);
-  color: var(--blue);
-  border-radius: 4px;
-  font-weight: bold;
-  padding: 1em;
-  font-size: 1.25em;
-  margin: 1em 0;
-  display: block;
+  .terminal{
+    @apply p-4 bg-black rounded-lg
+  }
 
-}
+  /* HEADER */
 
-a {
-  color: var(--ember);
-}
+  .header{
+    @apply w-full p-5 
+  }
 
-.fas { padding-right: .25em; }
+  .header-inner{
+    @apply flex w-full py-3 px-6 rounded-lg bg-gray-900
+  }
 
-footer {
-  position:fixed;
-  bottom: 0;
-  left: 200px;
-  width: 100%;
-  margin: 0 auto;
-  text-align:center;
-  background: var(--white);
-}
+  .header-icon{
+    @apply h-10 text-orange-500 mr-3
+  }
 
-footer p {
-  margin: .5em 0;
-}
+  .header-title{
+    @apply font-bold text-2xl text-gray-200
+  }
 
-.new-project-wrapper {
-  display: grid;
-  grid-template-columns: 1fr 3fr;
-}
+  .header-sub{
+    @apply text-sm text-gray-500 
+  }
 
-table, td,th {
-  border: 1px solid var(--black);
-  border-collapse: collapse;
-}
+  
+  /* NEW-PROJECT.HBS */
 
-table td, table th {
-  padding: .5em;
-}
+  .build-option {
+    @apply bg-gray-800 py-3 px-8 mb-2 rounded-md;
+  }
 
-.semver-badge {
-  color: var(--white);
-  padding: .25em;
-  border-radius: 2px;
-}
-.patch {
-  background: green;
-}
+  .build-option--svg{
+   @apply mr-5 h-6 w-8 text-gray-500; 
+  }
 
-.minor {
-  background: #ff7700;
-}
+  .wrapper {
+    @apply h-full text-white font-bold flex gap-6;
+  }
 
-.major {
-  background: var(--ember);
-}
-
-.loader {
-  border: 8px solid var(--faint-gray);
-  border-top: 8px solid var(--ember);
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  animation: spin 2s linear infinite;
-  margin-left: 50vh;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-.ember-tooltip {
-  min-width: 250px !important;
-}
-
-.build-log {
-  margin-top: 1em;
-  background: var(--faint-gray);
-  border: solid 1px var(--gray);
-  border-radius: 4px;
-  padding: 1em;
-  min-height:50px;
-}
-
-.date-time-wrapper {
-  margin-right: 1em;
 }

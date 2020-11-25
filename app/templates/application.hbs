@@ -1,64 +1,15 @@
-<div class="main">
-  <nav>
-    <p class="text-center"><img class="logo" alt="ember-cli-ui" src="/assets/images/logo.png"/>
-    </p>
-    <ul>
-      <li><LinkTo @route="index"><FaIcon @icon="home"/> Home</LinkTo></li>
-    </ul>
-    <hr/>
-    <h3 class="text-white">Tasks</h3>
-    <ul>
-      <li>
-        <LinkTo @route="serve">
-        <FaIcon @icon="server"/> Serve</LinkTo>
-      </li>
-      <li>
-        <LinkTo @route="test">
-        <FaIcon @icon="vial"/> Test</LinkTo></li>
-      <li><LinkTo @route="lint"><FaIcon @icon="broom"/> Lint</LinkTo></li>
-      <li><LinkTo @route="generate"><FaIcon @icon="plus-square"/> Generate</LinkTo></li>
-      <li><LinkTo @route="destroy"><FaIcon @icon="trash-alt"/> Destroy</LinkTo></li>
-      <li><LinkTo @route="install"><FaIcon @icon="download"/> Install</LinkTo></li>
-      <li><LinkTo @route="build"><FaIcon @icon="file-archive"/> Build</LinkTo></li>
-    </ul>
-    <hr/>
-    <h3 class="text-white">Project</h3>
-    <ul>
-      <li>
-        <LinkTo @route="project-tasks"><FaIcon @icon="tasks"/> Tasks</LinkTo>
-      </li>
-      <li>
-        <LinkTo @route="new-project"><FaIcon @icon="folder-plus"/> New Project</LinkTo>
-      </li>
-      <li>
-        <LinkTo @route="dependencies"><FaIcon @icon="cubes"/> Dependencies</LinkTo>
-      </li>
-      <li>
-        <LinkTo @route="project-update"><FaIcon @icon="wrench"/> Update</LinkTo>
-      </li>
-    </ul>
-  </nav>
-  <div class="right_col">
-    <header>
-      <div class="header-wrapper">
-      <div><FaIcon @icon="suitcase"/> {{this.project.name}}</div>
-      <div><FaIcon @icon="folder"/> {{this.project.projectPath}}  </div>
-      <div class="date-time-wrapper">
+<div class="application-layout">
 
-        <span>
-        {{this.datetime}} | 
-      <a href="https://github.com/rajasegar/ember-cli-ui/issues">
-          <FaIcon @icon="bug"/>
-        </a>
-        </span>
-      </div>
-      </div>
-    </header>
+  <NavigationBar/>
+
+  <main class="main-container">
     {{outlet}}
-    <footer>
-      <p class="text-center">
-      Made with <span class="text-ember">&hearts;</span> for the <a href="https://emberjs.com">Ember.js</a> community. Source code on <a href="https://github.com/rajasegar/ember-cli-ui">Github</a>
-       </p>
-    </footer>
+  </main>
+
+  <div class="meta-bar">
+    <p class="text-orange-200 text-sm m-auto"> Made with <span class="text-ember">&hearts;</span> for the <a href="https://emberjs.com">Ember.js</a> community. Source code on <a href="https://github.com/rajasegar/ember-cli-ui">Github</a></p>
   </div>
+  
 </div>
+
+

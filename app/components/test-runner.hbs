@@ -1,24 +1,46 @@
-<label>
-  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="ALL" checked/>
-ALL
-</label>
-<label>
-  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Unit"/>
-Unit
-</label>
-<label>
-  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Integration"/>
-Integration
-</label>
-<label>
-  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Acceptance"/>
-Acceptance
-</label>
-<label>
-  <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Custom"/>
-Custom 
-</label>
-<label for="custom-filter">Filter: </label>
-<Input type="text" id="custom-filter" @value={{this.filter}}/>
-<button type="button" {{on "click" this.runTests}}><FaIcon @icon="play"/> Run Tests</button>
-<Terminal @command={{this.command}} @task="test"/>
+<div class="wrapper">
+  <div class="flex-grid">
+    <div class="box">
+      <div class="input">
+        <label class="input-label">
+          <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="ALL" checked />
+          ALL
+        </label>
+      </div>
+      <div class="input">
+        <label class="input-label">
+          <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Unit" />
+          Unit
+        </label>
+      </div>
+      <div class="input">
+        <label class="input-label">
+          <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Integration" />
+          Integration
+        </label>
+      </div>
+      <div class="input">
+        <label class="input-label">
+          <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Acceptance" />
+          Acceptance
+        </label>
+      </div>
+      <div class="input">
+
+        <label class="input-label">
+          <Input type="radio" name="testFor" {{ on "change" this.updateType}} value="Custom" />
+          Custom
+        </label>
+      </div>
+       <div class="input border-t border-gray-800 pt-4">
+        <label class="input-label" for="custom-filter">Filter: </label>
+        <Input class="input-box" type="text" id="custom-filter" @value={{this.filter}} />
+      </div>
+
+    </div>
+    <div>
+      <button class="button-action" type="button" {{on "click" this.runTests}}> Run Tests</button>
+    </div>
+  </div>
+    <Terminal @command={{this.command}} @task="test" />
+</div>

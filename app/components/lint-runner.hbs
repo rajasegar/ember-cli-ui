@@ -1,14 +1,31 @@
-<label>
-  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="all" checked/>
-ALL
-</label>
-<label>
-  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="js"/>
-JS
-</label>
-<label>
-  <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="hbs"/>
-HBS
-</label>
-<button type="button" {{on "click" this.runLint}}><FaIcon @icon="play"/> Run Lint</button>
-<Terminal @command={{this.command}} @task="lint"/>
+<div class="wrapper">
+  <div class="flex-grid">
+    <div class="box">
+      <div class="input">
+        <label class="input-label">
+          <Input class="input-box" type="radio" name="lintFor" {{ on "change" this.updateType}} value="all" checked />
+          ALL
+        </label>
+      </div>
+      <div class="input">
+        <label class="input-label">
+          <Input class="input-box" type="radio" name="lintFor" {{ on "change" this.updateType}} value="js" />
+          JS
+        </label>
+      </div>
+      <div class="input">
+        <label class="input-label">
+          <Input type="radio" name="lintFor" {{ on "change" this.updateType}} value="hbs" />
+          HBS
+        </label>
+      </div>
+
+
+    </div>
+    <div>
+      <button class="button-action" type="button" {{on "click" this.runLint}}>
+        <FaIcon @icon="play" /> Run Lint</button>
+    </div>
+  </div>
+  <Terminal @command={{this.command}} @task="lint" />
+</div>
